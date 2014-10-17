@@ -1,0 +1,104 @@
+NetflixOr
+
+General:
+ - Who are my users
+ - What are my users trying to accomplish
+ - What kind of experiences do my users find appealing/rewarding
+ - How should my product behave
+ - What form should my product take
+ - How will my users interact with the product
+ - How can my product deal with problems users encounter
+ - How will my product help inexperienced AND experienced users to achieve their goals
+
+
+Qualitative Interview:
+ - ask clear open-ended questions such as HOW, WHAT, and WHY questions
+ - use appropriate follow-up probes ('you mentioned  ..., tell me more about it')
+ - active listening
+ - avoid quantitative questions like how much or how many
+ - avoid yes/no questions
+ - avoid biasing responses!( no leading questions, don't share your personal opinions, no emotional biased language)
+
+
+---- Fragen -------
+
+Was hat dich damals bewegt, ein ABO für einen VoD Service abzuschliessen?
+
+Wie war damals der Bestell bzw. Registrierungsvorgang?
+
+Bei welchen Gelegenheiten / In welchen Situation greifst du auf das Angebot/den Service zu?
+
+Wie sind deine bisherigen Erfahrungen mit dem Service
+(Wie findest du den Umgang mit dem Service)
+
+Was gefällt dir am bestehenden Angebot
+
+Was gefällt dir NICHT bzw. frustriert dich am bestehenden Angebot?
+
+Wie könnte das Angebot verbessert werden
+
+Wie findest du allgemein die Aufmachung/Design des Services
+
+Wenn du auf Probleme im Umgang mit dem Service stößt, wie wird dir hierbei geholfen bzw. unterstützt dich das System in solchen Situationen?
+
+Da du den Service jetzt schon länger verwendest, unterstützt dich das System als 'erfahrerener' Benutzer in irgendeiner Weise und wenn ja, wie? 
+
+Wie verhält sich dieser Service im Vergleich zu bisherigen Unterhaltungsangeboten wie TV/Bücher/DVDs
+
+Welche Arten von Veränderungen in deinem Unterhaltungskonsum haben sich seit der Verwendung des Services eingestellt
+
+Was ist dir beim Filmeschauen allgemein wichtig?
+
+Unabhängig vom Medium, wie entscheidest du, welche Filme/Serien du (als nächstes) sehen möchtest
+(Wie wirst du auf Filme/Serien aufmerksam gemacht)
+
+Worauf auchtest du bei der Auswahl deiner Filme/Serien 
+
+Imspeziellen bei deinem VoD Service, wie findest du die Filem/Serien, welche du gerne anschauen möchtest
+
+Allgemein, was macht für dich einen gelungenen Filmeabend aus?
+
+Worauf achtest du allgemein, wenn du Sachen im Internet einkaufst bzw. Verträge abschliesst.
+
+Gibt es sonst noch Anmerkungen bzgl des Services, welche bisher nicht von den bisherigen Fragen abgedeckt wurden
+
+
+
+Ideen -------------
+
+
+Kein Login/Registration
+ - Katalog sofort browsbar (Endless Scroll)
+ - Login bei Abruf des Filmes
+
+Kategorien:
+wenn Login
+ - Aus deiner Jugend (Serien)
+ - Aus deiner Jugend (Filme)
+ - Vorschläge
+   - Genre
+   - Schauspieler
+   - Andere User mit ähnlichen Sehgewohnheiten 
+   - Zufallskomponente
+   - Geschlechtsspezifisch (Action/Liebesfilm)
+   - Altersspezifisch (Was schauen Leute im selben Alter)
+ - Empfehlung von Freunden (FB/Socialgedöns)
+
+ - Bewertung (5Star/Imdb)
+ - Meist gesehen
+ - Sprache/Land
+ - Neuerscheinungen
+ - Standardkategorien
+ - Spezielle Anlässe: Ostern/Weihnachten
+ - Stimmung: Traurig Lustig Furcht /Sommer Winter Herbst...
+
+Nach Film:
+ - Find more like this 
+
+Add.Features:
+ - Playlisten / Watch Later
+ - Pick UP where you left
+ - Send to device (Pre Buffer) für zb längere Fahrten od. Flugreise ohne Verbindung
+ - Stops when you leave the room (camera)
+
+
