@@ -38,14 +38,13 @@ Wenn bereits ein VoD-Portal von der Person verwendet wird:
  - Seit dem Verwenden des Services, konnte sie irgendwelche Veränderungen in ihrem Unterhaltungskonsum feststellen?
 
 
- Allgemein:
+ - Allgemein, in welchen Situationen verspürt sie das Verlangen Filme/Serien zu sehen? 
 
- - In welchen Situationen verspürt sie das Verlangen Filme/Serien zu sehen? 
-
- - Was ist ihr beim Filmeschauen wichtig?
+ - Allgemein, was ist ihr beim Filmeschauen wichtig?
  
- - Worauf achtet sie bei der Auswahl ihrer Filme/Serien?
- 
- - Worauf achtet sie beim Abschluss von Vertägen / Einkäufen im Internet?
+ - Allgemein, worauf achtet sie bei der Auswahl ihrer Filme/Serien?
 
- - Gibt es sonst noch Anmerkungen bzgl des Services, welche bisher nicht von den bisherigen Fragen abgedeckt wurden?
+ - Allgemein, wie ist ihre Einstellung zu Abschlüssen von Verträgen im Internet?
+   - Worauf achtet sie (evtl. positive und negative Beispiele)?
+
+ - Allgemein, gibt es sonst noch Anmerkungen, welche bisher nicht von den bisherigen Fragen abgedeckt wurden?
