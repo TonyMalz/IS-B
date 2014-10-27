@@ -1,5 +1,30 @@
 Interview Guide:
 
+Bei nichtvorhandenem VoD-Portal:
+
+ - Wie sieht ihr aktueller Medienkonsum aus?
+
+ - Was wäre nötig, damit sie so ein Angebot abschließen würde?
+
+ - Welche Bedenken hätte sie gegenüber dem Service?
+ 
+ - Welche Punkte wären für sie persönlich besonders wichtig?
+
+ - Wo sieht sie den Vorteil eines solchen Angebots?
+
+ - Und wo sieht sie Nachteile?
+ 
+ - Welche Art von Abo-Modell im Speziellen würde sie sich wünschen? 
+ 
+ - Mit welchen Geräten würde sie am liebsten den Inhalt konsumieren?
+ 
+ - In welcher Umgebung würde sie den Service verwenden?
+
+ - Wie würde sie bei der Suche nach Filmen vorgehen?
+
+ - Wie steht sie Nutzerbewertungen bzw. Vorschlägen von Freunden & Bekannten gegenüber? 
+
+
 Wenn bereits ein VoD-Portal von der Person verwendet wird:
 
  - Was waren die Gründe ein ABO für einen VoD-Service abzuschliessen?
@@ -37,6 +62,8 @@ Wenn bereits ein VoD-Portal von der Person verwendet wird:
  
  - Seit dem Verwenden des Services, konnte sie irgendwelche Veränderungen in ihrem Unterhaltungskonsum feststellen?
 
+
+Allgemein
 
  - Allgemein, in welchen Situationen verspürt sie das Verlangen Filme/Serien zu sehen? 
 
