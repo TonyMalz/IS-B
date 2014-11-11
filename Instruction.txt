@@ -1,0 +1,20 @@
+The Search Function
+-------------------
+
+If you already know what you want to watch, you can use the searchbar in the $POSITION corner. You can not only search very specific items but also for plot elements [needs explanation?], actors and publication years and many more. You can filter the search results by checking or unchecking the appropriate boxes, where Genres, Ratings, $FILTERS can be selected to narrow the selection down.
+[Example?]
+
+The Browsing Section
+--------------------
+[maybe a picture which points to what i mean with categories and sections?]
+In the browsing section you can get inspired if you do not know what to watch.
+On the top the kind of content is selected. Movies, shows and a section especially for children, which contains material appropriate to the age you choose in the *parental control settings*.
+Scrolling _vertically_ in sections will get you an overview of the available categories.
+The $POSITION is [What's New?]. It contains movies which were recently released.
+The $POSITION is filled with recommendations for you, these are based on movies you have enjoyed in the past, as well as [some stuff]. Please consider looking into the privacy settings [do we have?] to configure or turn off [on?] this behavior.
+The remaining categories are the different genres, which will present you a selection of movies from each.
+Within the categories scrolling horizontally or clicking the arrows will browse throw the movie collection. A click on the SHOW MORE button will expand the view to three rows, a click on CLOSE [?], or anywhere outside the category will shrink it again.
+If you click on movie, it will expand and show you a description, user rating and reviews, a list of the actors, and more information. You can watch the trailer or the beginning of the movie. In case no one was logged in, after a while the movie will be interrupted, asking for a user account.
+
+
+...
