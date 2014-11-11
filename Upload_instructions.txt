@@ -1,1 +1,7 @@
 name : assignment_<assignment #>_<group #>.zip
+Paper mock-up prototype of your group
+• 	 All interface elements in all possible states; DIN A4
+Instructions
+•  2 pages DIN A4
+Example screens
+•  4 pages DIN A4 (one page per screen)
