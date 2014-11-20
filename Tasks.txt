@@ -1,3 +1,3 @@
-1. Suche die einen Film aus, sehe ihn dir an und bewerte ihn.
-2. Suche den Film "Terminator"
-3. Lege einen Favorit von $Serie an
+1. Suche die einen möglichst aktuellen Film aus, sehe ihn dir an und bewerte ihn.
+2. Suche den Film "Terminator".
+3. Pinne eine belibige Kategorie zu deinen Favoriten.
