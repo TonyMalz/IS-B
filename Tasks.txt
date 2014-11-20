@@ -1,3 +1,4 @@
 1. Suche die einen möglichst aktuellen Film aus, sehe ihn dir an und bewerte ihn.
 2. Suche den Film "Terminator".
 3. Pinne eine belibige Kategorie zu deinen Favoriten.
+4. Wechsle in den neu entstandenen Tab und fahre mit der wiedergabe einer beliebigen Serie fort.
