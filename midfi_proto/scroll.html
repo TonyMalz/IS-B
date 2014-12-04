@@ -1,0 +1,86 @@
+<html>
+<head>
+    <title>scroll</title>
+    <style type="text/css">
+        #view {
+            overflow-x: scroll;
+            width: 300px;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            position: relative;
+            cursor: pointer;
+            background: lightgray;
+        }
+        #mask, #content {
+            width: 800px;
+            height: 20px;
+            position: absolute;
+        }
+        #mask {
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>Test
+        <div id="view">
+            <div id="mask"></div>
+            <div id="content">ABCDEFGHIJKLMOPQRSTUVWXYZABCDEFGHIJKLMOPQRSTUVWXYZ</div>
+        </div>
+    </li>
+</ul>
+<div id="msg"></div>
+<script type="text/javascript">
+var view = document.getElementById("view");
+var scrollMin = 0;
+var scrollMax = document.getElementById("content").clientWidth - view.clientWidth;
+//console.log(scrollMax);
+var move = false;
+var down = false;
+var downX=0;
+var scrollPos = 0;
+
+    view.addEventListener("mousemove", function (e){
+        //console.log(e);
+        e.preventDefault();
+        move = true;
+        if (down) {
+           scrollBy(downX - e.clientX); 
+       }
+        
+    },false);
+
+    view.addEventListener("mousedown", function (e){
+        //console.log(e);
+        e.preventDefault();
+        down = true;
+        downX = e.clientX;
+    },false);
+
+    view.addEventListener("mouseup", function (e){
+        //console.log(e);
+        down = false;
+        scrollPos = view.scrollLeft;
+    },false);
+
+    view.addEventListener("mouseleave", function (e){
+        //console.log(e);
+        e.preventDefault();
+        down = false;
+        scrollPos = view.scrollLeft;
+    },false);
+
+    function scrollBy (pixels) {
+        var scrollTo = scrollPos + pixels;
+        if (scrollTo>scrollMax) {
+            scrollTo=scrollMax;
+        } else if (scrollTo<scrollMin){
+            scrollTo = scrollMin;
+        }
+        view.scrollLeft = scrollTo;
+    }
+</script>
+
+</body>
+</html>
