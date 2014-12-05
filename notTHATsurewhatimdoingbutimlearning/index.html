@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Video on Demand</title>
+	<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+	<header>
+		<input id="search" type="search" results value="Find..">
+	    
+		<a href="#" class="mainTab mainTabActive movies">Movies</a>
+		<a href="#" class="mainTab series">Series</a>
+		<a href="#" class="mainTab kids">Kids</a>
+		<a href="#" class="login">Settings</a>
+	</header>
+	<div id="first"></div>
+	<div id="main" class="tab">Accounts</div>
+		<div id="scroll" class="sectionwrapper">
+			<form>
+			<!-- 
+				Keine Required werte weil das nichtder erstellen
+				sondern bearbeiten dialog ist?
+			-->
+			<div id="left_box">
+				<label for="login_name">Login Name</label><br/>
+				<input id="login_name" type="text" name="login_name"/> <br/>
+
+				<label for="first_name">First Name</label><br/>
+				<input id="first_name" type="text" name="first_name"/> <br/>
+
+				<label for="surname">Surname</label><br/>
+				<input id="surname" type="text" name="surname"/><br/>
+			</div>
+			<div id="right_box">
+				<label for="password">Password</label><br/>
+				<input id="password" type="text" name="password"/><br/>
+
+				<label for="birthdate">Day of birth</label><br/>
+				<input id="birthdate" type="date" name="birthdate"/><br/>
+					
+				<label for="age_restriction">Age restriction</label><br/>
+				<input id="age_restriction" type="radio" name="age_restriction" value="disabled"/>Enabled
+				<br/>
+				
+				<input id="age_restriction" type="radio" name="age_restriction" value="disabled"/>Disabled<br/>
+
+				<input id="save_button" type="submit" value="Save"/>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
+<!-- <input type="submit" value="Login"/> -->
