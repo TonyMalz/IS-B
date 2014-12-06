@@ -7,26 +7,20 @@
 </head>
 <body>
 
-<header>
-   <input id="search" type="search" results value="" placeholder="Find...">
-    
- <!--
-<a href="#" class="mainTabActive movies">Movies</a>
-<a href="#" class="mainTab series">Series</a>
-<a href="#" class="mainTab kids">Kids</a>
-<a href="#" class="login">Settings</a>
--->
-<ul id="mainNav" class="tabs mainTabs">
-  <li class="tab active" data-target="#page1"> <span>Movies</span>
-    <button type="button" class="close">×</button>
-  </li>
-  <li class="tab" data-target="#page2"> <span>Series</span>
-    <button type="button" class="close">×</button>
-  </li>
-  <li class="tab" data-target="#page3"> <span>Kids</span>
-    <button type="button" class="close">×</button>
-  </li>
-</ul>
+<header id="header">
+    <input id="search" type="search" results value="" placeholder="Find...">
+
+    <ul id="mainNav" class="tabs mainTabs">
+      <li class="tab active" data-target="#page1"> <span>Movies</span>
+        <!-- <button type="button" class="close">×</button> -->
+      </li>
+      <li class="tab" data-target="#page2"> <span>Series</span>
+        <!-- <button type="button" class="close">×</button> -->
+      </li>
+      <li class="tab" data-target="#page3"> <span>Kids</span>
+        <!-- <button type="button" class="close">×</button> -->
+      </li>
+    </ul>
 </header>
 
 <div id="first"></div>
@@ -104,40 +98,67 @@
 
 })();
 
+// make tabs sortable
 $('#mainNav').chrometab();
 
 
-[].forEach.call(document.querySelectorAll('.tabsCat li'), function(item) {
-        
-    item.addEventListener("click", function (e){
-        var tabName = item.childNodes[1].innerText;
-        document.getElementById('mainNav').innerHTML += '<li class="tab" data-target="#page5"> <span>'+tabName+'</span><button type="button" class="close">×</button></li>';
+function addTabToMainNav(tabName){
+    var activeMainTab = document.querySelector('.active span');
+    var activeMainTabName = activeMainTab ? '<i>('+activeMainTab.innerText+')</i>' : '';
+    // console.log(activeMainTabName);
+    document.getElementById('mainNav').innerHTML += '<li class="tab" data-target="#page5"> <span>'+tabName+'</span>' + activeMainTabName + '<button type="button" class="close">×</button></li>';
+    registerCloseBtnEvent();
+    $('#mainNav').chrometab();
 
-        //re-register click events
-        [].forEach.call(document.querySelectorAll('#mainNav li button'), function(item) {
+}
+
+//close buttons
+function registerCloseBtnEvent(){
+    [].forEach.call(document.querySelectorAll('#mainNav li button'), function(item) {
             item.addEventListener("click", function (e){
             // console.log(item);
-            var li = item.parentNode;
-            li.parentNode.removeChild(li);
+            item.parentNode.remove();
             $('#mainNav').chrometab();
             e.preventDefault();
             },false);
         });
+}
 
-        $('.tabs').chrometab();
+// drag and drop on header / main navigation
+var header = document.getElementById('header');
+header.addEventListener("dragover" , function(e){
+    // console.log(e);
+    e.preventDefault();
+});
+header.addEventListener("drop" , function(e){
+    // console.log(e);
+    e.preventDefault();
+    var tabName = e.dataTransfer.getData("text");
+    addTabToMainNav(tabName);
+
+});
+
+// init category tabs
+[].forEach.call(document.querySelectorAll('.tabsCat li'), function(item) {
+    
+    //drag & drop behavior
+    item.addEventListener("dragstart" , function(ev){
+        // ev.dataTransfer.setData("text", ev.target.id);
+        ev.dataTransfer.setData("text", ev.target.childNodes[1].innerText);
+    });
+    
+    //add tab to main nav by clicking on + button 
+    item.addEventListener("click", function (e){
+        var tabName = item.childNodes[1].innerText;
+        addTabToMainNav(tabName);
+
+        //re-register click events
+        registerCloseBtnEvent();
         e.preventDefault();
+        
     },false);
 });
 
-[].forEach.call(document.querySelectorAll('#mainNav li button'), function(item) {
-        item.addEventListener("click", function (e){
-        // console.log(item);
-        var li = item.parentNode;
-        li.parentNode.removeChild(li);
-        $('#mainNav').chrometab();
-        e.preventDefault();
-        },false);
-    });
 
 if (false) {
 

@@ -549,6 +549,11 @@ TAAAAAAAAAAABS
 .tab span {
   font-size: 14px;
 }
+.tab i {
+    font-size: 10px;
+    color: black;
+    padding-left: 6px;
+}
 
 .tab:before,
 .tab:after {
