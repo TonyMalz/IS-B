@@ -408,7 +408,7 @@ td {
    ========================================================================== */
 body {
     padding: 0 1% 0 1%;
-    background: gray;
+    background: rgb(76, 72, 70);
 }
 
 header {
@@ -419,7 +419,7 @@ header {
     position: fixed;
     z-index: 100;
     width: 98%;
-    background: gray;
+    background: rgb(51, 66, 68);
     top:0;
 }
 
@@ -514,7 +514,7 @@ TAAAAAAAAAAABS
 
   position: relative;
   padding: 0 39px;
-  color: #fff;
+  color: rgb(175, 216, 221);
 }
 
 .mainTabs {
@@ -848,7 +848,7 @@ figcaption a {
 }
 
 section:hover .stars {
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 /* ==|== non-semantic helper classes ========================================
