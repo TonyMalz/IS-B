@@ -34,6 +34,8 @@
 <!--JS includes-->
 <script src='ftscroller-master/lib/ftscroller.js'></script>
 <script src="chrometabs/chrometab.js"></script> 
+
+
 <!-- JS templates -->
 <script id="template" type="template">
 <div class="categoryRow">
@@ -42,11 +44,16 @@
             <button type="button" class="close closeAdd">+</button>
         </li>
     </ul>
+        <div class='scrollBtn scrollBtnLeft' data-id='{id}' data-dir='left'>
+            <
+        </div>
+        <div class='scrollBtn scrollBtnRight' data-id='{id}' data-dir='right'>
+            >
+        </div>
     <div id="scroll{id}" class='scrollable'>
         <div class='sectionwrapper'>
             {movies}
         </div>
-
     </div>
     <a id="showmore{id}" data-close="0" data-translate="0" class="showmore">V &nbsp;&nbsp;Show more</a>
 </div>
@@ -61,7 +68,7 @@
                         <p>Test text blalbal blab sdsd sdsd
                          sdsd
                         </p>
-                        <p><a href="#">show more</a></p>
+                        <p><a href="#">> show more</a></p>
                     </figcaption>
                 </figure>
                 <span class="stars">
@@ -72,65 +79,87 @@
 
 <!-- JS -->
 <script>
-(function() {
-    var Viewer = {
-        template:       document.getElementById('template').text.trim(),
-        movieTemplate:  document.getElementById('movieTemplate').text.trim(),
-        movieCategories: ['New Releases','Popular','Recommended','Action','Comedy','Drama','Fantasy','Sci-Fi','Thriller','Horror','Romantic'],
 
-        init: function(){
-            this.applyMovieTemplate(1,72);
-        },
+var Viewer = {
+    template:       document.getElementById('template').text.trim(),
+    movieTemplate:  document.getElementById('movieTemplate').text.trim(),
+    movieCategories: ['New Releases','Popular','Recommended','Action','Comedy','Drama','Fantasy','Sci-Fi','Thriller','Horror','Romantic'],
+    scrollers: [],
+    init: function(){
+        this.applyMovieTemplate(1,72);
+    },
 
-        applyMovieTemplate: function(pageRepeat, moviesPerCat){
-            var temp='';
-            var id=0;
+    applyMovieTemplate: function(pageRepeat, moviesPerCat){
+        var temp='';
+        var id=0;
 
-            var catTemp="";
+        var catTemp="";
 
-            //build up array
-            var imgs = [];
-            for (var i = 0; i < moviesPerCat; i++) {
-                imgs.push(i);
-            }
-            
-            
-
-
-            var page=0;
-            while (page++<pageRepeat){
-                for (var i = 0; i < this.movieCategories.length ; i++) {
-
-                    catTemp = '';
-                    //shuffle array
-                    imgs.sort(function() {
-                      return .5 - Math.random();
-                    });
-                    for (var j = imgs.length - 1; j >= 0; j--) {
-                        catTemp += this.movieTemplate.replace(/{i}/,imgs[j])
-                                                     .replace(/{stars}/,imgs[j]%25);
-                    }
-                    temp += this.template.replace(/{categoryName}/, this.movieCategories[i])
-                                         .replace(/{id}/g,id++)
-                                         .replace(/{movies}/,catTemp);
-                    
-                };
-            }
-            document.getElementById('main').innerHTML=temp;
-            this.initScrolls(id);
-        },
-
-        initScrolls: function (maxId){
-            for (var id = 0; id < maxId; id++) {
-                new FTScroller(document.getElementById('scroll'+id), {scrollingY: false,snapping: false,scrollbars: false, disabledInputMethods:{scroll: true}});
-            }
+        //build up array
+        var imgs = [];
+        for (var i = 0; i < moviesPerCat; i++) {
+            imgs.push(i);
         }
 
-    };
+        var page=0;
+        while (page++<pageRepeat){
+            for (var i = 0; i < this.movieCategories.length ; i++) {
 
-    Viewer.init();
+                catTemp = '';
+                //shuffle array
+                imgs.sort(function() {
+                  return .5 - Math.random();
+                });
+                for (var j = imgs.length - 1; j >= 0; j--) {
+                    catTemp += this.movieTemplate.replace(/{i}/,imgs[j])
+                                                 .replace(/{stars}/,imgs[j]%25);
+                }
+                temp += this.template.replace(/{categoryName}/, this.movieCategories[i])
+                                     .replace(/{id}/g,id++)
+                                     .replace(/{movies}/,catTemp);
+                
+            };
+        }
+        document.getElementById('main').innerHTML=temp;
+        this.initScrolls(id);
+        this.initScrollBtns();
+    },
 
-})();
+    initScrolls: function (maxId){
+        for (var id = 0; id < maxId; id++) {
+            this.scrollers.push(new FTScroller(document.getElementById('scroll'+id), {scrollingY: false,snapping: false,scrollbars: false, disabledInputMethods:{scroll: true}}));
+        }
+    },
+
+    initScrollBtns: function (){
+        [].forEach.call(document.querySelectorAll('.scrollBtn'), function(item) {
+            //move scroller
+            item.addEventListener("click", function (e){
+                // console.log(Viewer.scrollers);
+                var scrollId = item.dataset.id;
+                var duration = 500; //ms
+                var amount = item.dataset.dir === 'right' ? 1000 : -1000;
+                Viewer.scrollers[scrollId].scrollBy(amount,0,duration);
+
+                e.preventDefault();
+            },false);
+
+            item.addEventListener("mousedown", function (e){
+                item.className += ' scrollBtnPressed';
+            },false);
+
+            item.addEventListener("mouseup", function (e){
+                item.className = item.className.replace( /scrollBtnPressed/ , '' );
+            },false);
+        });
+
+    }
+
+};
+
+Viewer.init();
+
+
 
 
 
@@ -240,8 +269,8 @@ header.addEventListener("drop" , function(e){
             scrollContainer.style.whiteSpace='nowrap';
             e.target.innerHTML='V &nbsp;&nbsp;Show more';
             e.target.dataset.close=0;
-            // scrollContainer.scrollIntoView();
-            window.scrollTo(0,scrollContainer.offsetTop - 150);
+            scrollContainer.scrollIntoView();
+            //window.scrollTo(0,scrollContainer.offsetTop);
         }
         
         // console.log(containerId);

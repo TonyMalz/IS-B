@@ -668,6 +668,7 @@ footer {
             padding: 0px;
             display: inline-flex;
             cursor: pointer;
+            _position: relative;
         }
 
         /* Style each 'page' to be the same size and join together into a long horizontal strip.  Use display: table on the section wrapper to get rid of whitespace between the inline-blocks. */
@@ -706,7 +707,7 @@ footer {
 
         }
 
-        .scrollable:before,
+        /*.scrollable:before,
         .scrollable:after {
             
             margin-top: 30px;
@@ -737,7 +738,46 @@ footer {
             border-bottom-left-radius: 10px;
             border-top-left-radius: 10px;
             margin-left: -30px;
+        }*/
+
+
+        .scrollBtn{
+            
+            margin-top: 30px;
+            width: 19px;
+            text-align: center;
+            line-height: 133px;
+            background-color: #cecece;
+            cursor: pointer;
+            color: #57595b;
+            
+            
+            border: 1px solid;
+            padding: 5px;
+
+            position: absolute;
+            z-index: 1;
+            opacity: 0.7;
+
         }
+        .scrollBtn:hover{
+            opacity: .9;
+        }
+        .scrollBtnPressed {
+            border: 3px solid;
+            padding: 3px;
+        }
+        
+        .scrollBtnLeft{
+            border-bottom-right-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .scrollBtnRight{
+            border-bottom-left-radius: 10px;
+            border-top-left-radius: 10px;
+            right: 0;
+        }
+
 
 
 .showmore {
@@ -747,7 +787,7 @@ footer {
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
     position: absolute;
-    right: 10px;
+    right: 12px;
     font-size: 0.7em;
     color: white;
     background: black;
@@ -759,8 +799,9 @@ footer {
 }
 
 .categoryRow{
-    overflow: hidden;
+    overflow: visible;
     padding-bottom: 14px;
+    position: relative;
 }
 
 figure {
@@ -817,6 +858,7 @@ figcaption h3 {
 
 figcaption p {
     transition-delay: .4s;
+    font-size: 0.8em;
 }
 
 figure:hover h3,
@@ -834,7 +876,7 @@ figcaption a {
 }
 
 .stars {
-    opacity: 0;
+    opacity: 0.7;
     background: white;
     border-radius: 5px;
     margin-left: 40px;
@@ -842,14 +884,14 @@ figcaption a {
     padding-right: 5px;
     width: 100%;
     transition: all .4s;
-    transition-delay: 0.6s;
+    transition-delay: 0.8s;
     overflow: hidden;
 
 }
 
-section:hover .stars {
+/*section:hover .stars {
     opacity: 0.8;
-}
+}*/
 
 /* ==|== non-semantic helper classes ========================================
    Please define your styles before this section.
