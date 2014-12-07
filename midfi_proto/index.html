@@ -28,6 +28,7 @@
 
 
 </div>
+
 <footer></footer>
 
 <!--JS includes-->
@@ -51,7 +52,22 @@
 </div>
 </script>
 <script id="movieTemplate" type="template">
-            <section><div></div></section>
+            <section>
+                <figure>
+                    <img src="new/m-{i}.jpg">
+                    <figcaption>
+
+                        <h3>>  &nbsp; Watch</h3>
+                        <p>Test text blalbal blab sdsd sdsd
+                         sdsd
+                        </p>
+                        <p><a href="#">show more</a></p>
+                    </figcaption>
+                </figure>
+                <span class="stars">
+                    <img src="images/stars-{stars}.gif">
+                </span>
+            </section>
 </script>
 
 <!-- JS -->
@@ -63,22 +79,37 @@
         movieCategories: ['New Releases','Popular','Recommended','Action','Comedy','Drama','Fantasy','Sci-Fi','Thriller','Horror','Romantic'],
 
         init: function(){
-            this.applyMovieTemplate(3,100);
+            this.applyMovieTemplate(1,72);
         },
 
         applyMovieTemplate: function(pageRepeat, moviesPerCat){
             var temp='';
             var id=0;
 
-            var cat=0;
             var catTemp="";
-            while(cat++ < moviesPerCat){
-                catTemp += this.movieTemplate;
+
+            //build up array
+            var imgs = [];
+            for (var i = 0; i < moviesPerCat; i++) {
+                imgs.push(i);
             }
+            
+            
+
 
             var page=0;
             while (page++<pageRepeat){
                 for (var i = 0; i < this.movieCategories.length ; i++) {
+
+                    catTemp = '';
+                    //shuffle array
+                    imgs.sort(function() {
+                      return .5 - Math.random();
+                    });
+                    for (var j = imgs.length - 1; j >= 0; j--) {
+                        catTemp += this.movieTemplate.replace(/{i}/,imgs[j])
+                                                     .replace(/{stars}/,imgs[j]%25);
+                    }
                     temp += this.template.replace(/{categoryName}/, this.movieCategories[i])
                                          .replace(/{id}/g,id++)
                                          .replace(/{movies}/,catTemp);
