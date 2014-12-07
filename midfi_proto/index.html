@@ -35,6 +35,7 @@
 <script src="chrometabs/chrometab.js"></script> 
 <!-- JS templates -->
 <script id="template" type="template">
+<div class="categoryRow">
     <ul class="tabsCat">
         <li class="tab" draggable="true"> <span>{categoryName}</span>
             <button type="button" class="close closeAdd">+</button>
@@ -44,8 +45,10 @@
         <div class='sectionwrapper'>
             {movies}
         </div>
-    </div>
 
+    </div>
+    <a id="showmore{id}" data-close="0" data-translate="0" class="showmore">V &nbsp;&nbsp;Show more</a>
+</div>
 </script>
 <script id="movieTemplate" type="template">
             <section><div></div></section>
@@ -60,7 +63,7 @@
         movieCategories: ['New Releases','Popular','Recommended','Action','Comedy','Drama','Fantasy','Sci-Fi','Thriller','Horror','Romantic'],
 
         init: function(){
-            this.applyMovieTemplate(3,30);
+            this.applyMovieTemplate(3,100);
         },
 
         applyMovieTemplate: function(pageRepeat, moviesPerCat){
@@ -77,7 +80,7 @@
             while (page++<pageRepeat){
                 for (var i = 0; i < this.movieCategories.length ; i++) {
                     temp += this.template.replace(/{categoryName}/, this.movieCategories[i])
-                                         .replace(/{id}/,id++)
+                                         .replace(/{id}/g,id++)
                                          .replace(/{movies}/,catTemp);
                     
                 };
@@ -98,8 +101,12 @@
 
 })();
 
+
+
 // make tabs sortable
 $('#mainNav').chrometab();
+
+
 
 
 function addTabToMainNav(tabName){
@@ -157,6 +164,59 @@ header.addEventListener("drop" , function(e){
         e.preventDefault();
         
     },false);
+});
+
+
+
+//show more links
+[].forEach.call(document.querySelectorAll('.showmore'), function(item) {
+    
+    //drag & drop behavior
+    item.addEventListener("click" , function(e){
+        e.preventDefault();
+        var containerId= e.target.id.replace(/showmore/,'');
+        var scrollContainer = document.getElementById('scroll'+containerId);
+        // console.log(e.target.dataset.close);
+        
+        //expanding
+        if (scrollContainer && e.target.dataset.close == 0) {
+            
+            var scroll = scrollContainer.querySelector('.ftscroller_x');
+
+            //save scroll position width if set
+            if (scroll.style.transform) {
+                e.target.dataset.translate = scroll.style.transform;
+                // console.log(scroll.style.transform);
+            }
+            //reset scroll position
+            scroll.style.transform="translate3d(0,0,0)";
+            //unwrap container
+            scrollContainer.style.whiteSpace='initial';
+            e.target.innerHTML='x &nbsp;&nbsp;Show less';
+            e.target.dataset.close=1;
+
+        } 
+        // closing 
+        else if (scrollContainer && e.target.dataset.close == 1) {
+            var scroll = scrollContainer.querySelector('.ftscroller_x');
+            
+            //restore scroll position if set
+            if (e.target.dataset.translate != 0 && scroll) {
+                scroll.style.transform = e.target.dataset.translate;
+                // console.log(scroll.style.transform);
+            }
+            e.target.dataset.translate=0;
+            scrollContainer.style.whiteSpace='nowrap';
+            e.target.innerHTML='V &nbsp;&nbsp;Show more';
+            e.target.dataset.close=0;
+            // scrollContainer.scrollIntoView();
+            window.scrollTo(0,scrollContainer.offsetTop - 150);
+        }
+        
+        // console.log(containerId);
+        // console.log(scrollContainer);
+    },false);    
+
 });
 
 
