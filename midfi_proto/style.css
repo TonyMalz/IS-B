@@ -476,6 +476,7 @@ position: absolute;
 top: 30px;
 left: 0px;
 z-index: 10;
+_border-radius: 13px;
 }
 
 .main {
@@ -541,7 +542,7 @@ TAAAAAAAAAAABS
   background: #64635F;
   padding: 5px 10px;
   position: relative;
-  _border-top: 1px solid #728cad;
+  border-top: 1px solid #1D1D1D;;
   margin-right: 6px;
   font-size: 0;
   cursor: pointer;
@@ -569,7 +570,7 @@ TAAAAAAAAAAABS
 
 .tab:before {
   left: -5px;
-  _border-left: 1px solid #728cad;
+  border-left: 1px solid #1D1D1D;;
   z-index: 3;
   -webkit-transform: rotate(15deg);
   -moz-transform: rotate(15deg);
@@ -580,7 +581,7 @@ TAAAAAAAAAAABS
 
 .tab:after {
   right: -5px;
-  _border-right: 1px solid #728cad;
+  border-right: 1px solid #1D1D1D;;
   z-index: 4;
   -webkit-transform: rotate(-15deg);
   -moz-transform: rotate(-15deg);
@@ -594,7 +595,7 @@ TAAAAAAAAAAABS
   border-bottom: 1px solid #fff;
   height: 27px;
   margin-bottom: -1px;
-  z-index: 10;
+  z-index: 5;
   color: #000;
 }
 
