@@ -11,11 +11,13 @@
     <input id="search" type="search" results value="" placeholder="Find...">
 
     <ul id="mainNav" class="tabs mainTabs">
-      <li id="movieTab" class="tab active mainTab" data-target="#page1"> <span>Movies</span>
+      <li id="movieTab" class="tab active mainTab" > <span>Movies</span>
       </li>
-      <li id="seriesTab" class="tab mainTab" data-target="#page2"> <span>Series</span>
+      <li id="seriesTab" class="tab mainTab"> <span>Series</span>
       </li>
-      <li id="kidsTab" class="tab mainTab" data-target="#page3"> <span>Kids</span>
+      <li id="kidsTab" class="tab mainTab"> <span>Kids</span>
+      </li>
+      <li id="watchlist" class="tab mainTab"> <span>Watch List</span>
       </li>
     </ul>
 </header>
@@ -30,6 +32,7 @@
 
 <!--JS includes-->
 <script src='ftscroller-master/lib/ftscroller.js'></script>
+<script src='jquery.js'></script>
 
 <!-- JS templates -->
 <script id="movieTemplate" type="template">
@@ -55,7 +58,7 @@
 </script>
 
 <script id="movieSectionTemplate" type="template">
-            <section>
+            <section class="item">
                 <figure>
                     <img src="new/m-{i}.jpg">
                     <figcaption>
@@ -70,7 +73,9 @@
                 </figure>
                 <span class="stars">
                     <img src="images/stars-{stars}.gif">
+
                 </span>
+                <button class="watchLater" type="button">watch later</button>
             </section>
 </script>
 
@@ -111,7 +116,7 @@
     </div>
 </script>
 <script id="seriesSectionTemplate" type="template">
-            <section class="sectionSeries">
+            <section class="sectionSeries item">
                 <figure class="figureSeries">
                     <img src="series/m-{i}.jpg">
                     <figcaption>
@@ -128,6 +133,7 @@
                 <span class="stars">
                     <img src="images/stars-{stars}.gif">
                 </span>
+                <button class="watchLater" type="button">watch later</button>
             </section>
 </script>
 
@@ -155,14 +161,17 @@
 <!-- JS -->
 <script>
 
+
+
 var MovieViewer = {
     template:       document.getElementById('movieTemplate').text.trim(),
     movieTemplate:  document.getElementById('movieSectionTemplate').text.trim(),
     movieCategories: ['New Releases','Popular','Recommended','Action','Comedy','Drama','Fantasy','Sci-Fi','Thriller','Horror','Romantic'],
     scrollers: [],
-    init: function(){
-
-        this.applyTemplate(1,72);
+    init: function(moviesPerCat, pageRepeat){
+        pageRepeat = pageRepeat ? pageRepeat : 1;
+        moviesPerCat = moviesPerCat ? moviesPerCat : 72;
+        this.applyTemplate(pageRepeat,moviesPerCat);
     },
 
     applyTemplate: function(pageRepeat, moviesPerCat){
@@ -305,8 +314,9 @@ var SeriesViewer = {
     sectionRecentlyWatchedTemplate:  document.getElementById('seriesSectionTemplateRecentlyWatched').text.trim(),
     movieCategories: ['New Releases','Popular','Recommended','Recently Watched','Action','Comedy','Drama','Fantasy','Sci-Fi','Thriller','Horror'],
     scrollers: [],
-    init: function(){
-
+    init: function(moviesPerCat,pageRepeat){
+        pageRepeat = pageRepeat ? pageRepeat : 1;
+        moviesPerCat = moviesPerCat ? moviesPerCat : 68;
         this.applyMovieTemplate(1,68);
     },
 
@@ -595,6 +605,54 @@ var Navigation = {
 
 };
 Navigation.init();
+
+
+//---------- experiments
+
+    $('.watchLater').on('click', function () {
+        var cart = $('#watchlist');
+        var imgtodrag = $(this).parent('.item').find("img").eq(0);
+        if (imgtodrag) {
+            var imgclone = imgtodrag.clone()
+                .offset({
+                top: imgtodrag.offset().top,
+                left: imgtodrag.offset().left
+            })
+                .css({
+                'opacity': '0.7',
+                    'position': 'absolute',
+                    'height': '150px',
+                    'width': '150px',
+                    'z-index': '100'
+            })
+                .appendTo($('body'))
+                .animate({
+                    'top': cart.offset().top + 10,
+                    'left': cart.offset().left + 10,
+                    'width': 75,
+                    'height': 75
+            }, 1000);
+            
+            setTimeout(function() {
+                var tab = document.getElementById('watchlist');
+                if (tab) {
+                    //let it blink...
+                    tab.style['-webkit-animation']='watch_list 1s';
+                    setTimeout(function(){tab.style['-webkit-animation']='';},1100);
+                }
+            },1000);
+
+            
+
+            imgclone.animate({
+                'width': 0,
+                    'height': 0
+            }, function () {
+                $(this).detach()
+            });
+        }
+    });
+
 
 </script>
 </body>

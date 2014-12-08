@@ -575,6 +575,9 @@ TAAAAAAAAAAABS
   font-size: 0;
   cursor: pointer;
 }
+.tabsCat .tab {
+  cursor: move;
+}
 
 .tab span {
   white-space: nowrap;
@@ -746,6 +749,46 @@ position: absolute;
     border-top: 4px solid #40FF92;
   }
 }
+
+.watchLater {
+  border-radius: 12px;
+  font-size: 12px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-left-width: 2px;
+  margin-left: 9px;
+  /* border: 1px; */
+  margin-right: 0px;
+  border-top-width: 0px;
+  border-bottom-width: 0px;
+}
+
+@-webkit-keyframes 'watch_list' {
+  50% {
+    padding-top: 2px;
+    border-top: 4px solid #40FF92;
+  }
+
+  55% {
+    padding-top: 2px;
+    border-top: 4px solid black;
+  }
+
+  70% {
+    padding-top: 2px;
+    border-top: 4px solid #40FF92;
+  }
+
+  75% {
+    padding-top: 2px;
+    border-top: 4px solid black;
+  }
+  90%,100% {
+    padding-top: 2px;
+    border-top: 4px solid #40FF92;
+  }
+}
+
 
 footer {
     height: 400px;
@@ -981,7 +1024,7 @@ figcaption a {
     opacity: 0.7;
     background: white;
     border-radius: 5px;
-    margin-left: 40px;
+    margin-left: 0px;
     padding-left: 5px;
     padding-right: 5px;
     width: 100%;
