@@ -922,7 +922,7 @@ figcaption {
     position: absolute;
     top: 0;
     color: white;
-    background: rgba(0,0,0,.6);
+    background: rgba(0,0,0,.7);
     height: 100%;
     width: 100%;
     overflow: hidden;

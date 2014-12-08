@@ -65,7 +65,7 @@
                         USA 2010<br>
                         94 min<br><br>
                         Chuck Norris, Brad Pitt, Tom Cruise, ...<br>
-                        <a href="#">> show more</a></p>
+                        <a href="#" onclick="return false;">> show more</a></p>
                     </figcaption>
                 </figure>
                 <span class="stars">
@@ -122,7 +122,28 @@
                         USA 2012<br>
                         <br>
                         Chuck Norris, Brad Pitt, Tom Cruise, ...<br>
-                        <a href="#">> show more</a></p>
+                        <a href="#" onclick="return false;">> show more</a></p>
+                    </figcaption>
+                </figure>
+                <span class="stars">
+                    <img src="images/stars-{stars}.gif">
+                </span>
+            </section>
+</script>
+
+<script id="seriesSectionTemplateRecentlyWatched" type="template">
+            <section class="sectionSeries">
+                <figure class="figureSeries">
+                    <img src="series/m-{i}.jpg">
+                    <figcaption>
+
+                        <h3>>  &nbsp; Continue at Episode 3</h3>
+                        <p>Series Title here<br>
+                        SEASON 3<br>
+                        USA 2012<br>
+                        <br>
+                        Chuck Norris, Brad Pitt, Tom Cruise, ...<br>
+                        <a href="#" onclick="return false;">> show more</a></p>
                     </figcaption>
                 </figure>
                 <span class="stars">
@@ -281,6 +302,7 @@ var SeriesViewer = {
     template:       document.getElementById('seriesTemplate').text.trim(),
     movieTemplate:  document.getElementById('seriesSectionTemplate').text.trim(),
     recentlyWatchedTemplate:  document.getElementById('seriesTemplateRecentlyWatched').text.trim(),
+    sectionRecentlyWatchedTemplate:  document.getElementById('seriesSectionTemplateRecentlyWatched').text.trim(),
     movieCategories: ['New Releases','Popular','Recommended','Recently Watched','Action','Comedy','Drama','Fantasy','Sci-Fi','Thriller','Horror'],
     scrollers: [],
     init: function(){
@@ -312,11 +334,11 @@ var SeriesViewer = {
 
                 if (i==3 /*recently watched*/) {
                     var ii = imgs.length-1;
-                    catTemp += this.movieTemplate.replace(/{i}/,imgs[ii--])
+                    catTemp += this.sectionRecentlyWatchedTemplate.replace(/{i}/,imgs[ii--])
                                              .replace(/{stars}/,imgs[ii]%25);
-                    catTemp += this.movieTemplate.replace(/{i}/,imgs[ii--])
+                    catTemp += this.sectionRecentlyWatchedTemplate.replace(/{i}/,imgs[ii--])
                                              .replace(/{stars}/,imgs[ii]%25);
-                    catTemp += this.movieTemplate.replace(/{i}/,imgs[ii--])
+                    catTemp += this.sectionRecentlyWatchedTemplate.replace(/{i}/,imgs[ii--])
                                              .replace(/{stars}/,imgs[ii]%25);
                     temp += this.recentlyWatchedTemplate.replace(/{categoryName}/, this.movieCategories[i])
                                      .replace(/{id}/g,id++)
