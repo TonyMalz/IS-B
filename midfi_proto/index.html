@@ -11,13 +11,13 @@
     <input id="search" type="search" results value="" placeholder="Find...">
 
     <ul id="mainNav" class="tabs mainTabs">
-      <li class="tab active" data-target="#page1"> <span>Movies</span>
+      <li class="tab active mainTab" data-target="#page1"> <span>Movies</span>
         <!-- <button type="button" class="close">×</button> -->
       </li>
-      <li class="tab" data-target="#page2"> <span>Series</span>
+      <li class="tab mainTab" data-target="#page2"> <span>Series</span>
         <!-- <button type="button" class="close">×</button> -->
       </li>
-      <li class="tab" data-target="#page3"> <span>Kids</span>
+      <li class="tab mainTab" data-target="#page3"> <span>Kids</span>
         <!-- <button type="button" class="close">×</button> -->
       </li>
     </ul>
@@ -40,7 +40,7 @@
 <script id="template" type="template">
 <div class="categoryRow">
     <ul class="tabsCat">
-        <li class="tab" draggable="true"> <span>{categoryName}</span>
+        <li class="tab" draggable="true" data-id='{id}'> <span>{categoryName}</span>
             <button type="button" class="close closeAdd">+</button>
         </li>
     </ul>
@@ -58,6 +58,7 @@
     <a id="showmore{id}" data-close="0" data-translate="0" class="showmore">V &nbsp;&nbsp;Show more</a>
 </div>
 </script>
+
 <script id="movieTemplate" type="template">
             <section>
                 <figure>
@@ -65,10 +66,11 @@
                     <figcaption>
 
                         <h3>>  &nbsp; Watch</h3>
-                        <p>Test text blalbal blab sdsd sdsd
-                         sdsd
-                        </p>
-                        <p><a href="#">> show more</a></p>
+                        <p>Movie Title here<br>
+                        USA 2010<br>
+                        94 min<br><br>
+                        Chuck Norris, Brad Pitt, Tom Cruise, ...<br>
+                        <a href="#">> show more</a></p>
                     </figcaption>
                 </figure>
                 <span class="stars">
@@ -145,11 +147,11 @@ var Viewer = {
             },false);
 
             item.addEventListener("mousedown", function (e){
-                item.className += ' scrollBtnPressed';
+                item.classList.add('scrollBtnPressed');
             },false);
 
             item.addEventListener("mouseup", function (e){
-                item.className = item.className.replace( /scrollBtnPressed/ , '' );
+                item.classList.remove('scrollBtnPressed');
             },false);
         });
 
@@ -164,18 +166,36 @@ Viewer.init();
 
 
 // make tabs sortable
-$('#mainNav').chrometab();
+//$('#mainNav').chrometab();
 
 
 
 
-function addTabToMainNav(tabName){
+function addTabToMainNav(tabName,id){
+    // console.log(id);
+
     var activeMainTab = document.querySelector('.active span');
-    var activeMainTabName = activeMainTab ? '<i>('+activeMainTab.innerText+')</i>' : '';
+    // check if tab already exists
+    var tab = document.getElementById(id+'.'+activeMainTab.innerText);
+    if (tab) {
+        //let it blink...
+        tab.style['-webkit-animation']='blink_red 1s';
+        setTimeout(function(){tab.style['-webkit-animation']='';},1100);
+        return;
+    }
+    // var activeMainTabName = activeMainTab ? '<i>('+activeMainTab.innerText+')</i>' : '';
+    var activeMainTabName = activeMainTab ? ' in '+activeMainTab.innerText : '';
     // console.log(activeMainTabName);
-    document.getElementById('mainNav').innerHTML += '<li class="tab" data-target="#page5"> <span>'+tabName+'</span>' + activeMainTabName + '<button type="button" class="close">×</button></li>';
+    document.getElementById('mainNav').innerHTML += '<li class="tab" id="'+id+'.'+activeMainTab.innerText+'"> <span>'+tabName+activeMainTabName+'</span>' +  '<button type="button" class="close">×</button></li>';
     registerCloseBtnEvent();
-    $('#mainNav').chrometab();
+    //$('#mainNav').chrometab();
+    //ok -> blink green
+    var tab = document.getElementById(id+'.'+activeMainTab.innerText);
+    if (tab) {
+        //let it blink...
+        tab.style['-webkit-animation']='blink_green 1s';
+        setTimeout(function(){tab.style['-webkit-animation']='';},1100);
+    }
 
 }
 
@@ -185,13 +205,13 @@ function registerCloseBtnEvent(){
             item.addEventListener("click", function (e){
             // console.log(item);
             item.parentNode.remove();
-            $('#mainNav').chrometab();
+            //$('#mainNav').chrometab();
             e.preventDefault();
             },false);
         });
 }
 
-// drag and drop on header / main navigation
+// drag and drop on to main navigation
 var header = document.getElementById('header');
 header.addEventListener("dragover" , function(e){
     // console.log(e);
@@ -201,7 +221,8 @@ header.addEventListener("drop" , function(e){
     // console.log(e);
     e.preventDefault();
     var tabName = e.dataTransfer.getData("text");
-    addTabToMainNav(tabName);
+    var id = e.dataTransfer.getData("id");
+    addTabToMainNav(tabName,id);
 
 });
 
@@ -210,14 +231,22 @@ header.addEventListener("drop" , function(e){
     
     //drag & drop behavior
     item.addEventListener("dragstart" , function(ev){
+        document.getElementById('mainNav').style.paddingTop="20px";
         // ev.dataTransfer.setData("text", ev.target.id);
         ev.dataTransfer.setData("text", ev.target.childNodes[1].innerText);
+        ev.dataTransfer.setData("id", ev.target.dataset.id);
+    });
+
+    item.addEventListener("dragend" , function(ev){
+        document.getElementById('mainNav').style.paddingTop="0";
+        // ev.dataTransfer.setData("text", ev.target.id);
     });
     
+
     //add tab to main nav by clicking on + button 
-    item.addEventListener("click", function (e){
+    item.querySelector('button').addEventListener("click", function (e){
         var tabName = item.childNodes[1].innerText;
-        addTabToMainNav(tabName);
+        addTabToMainNav(tabName,item.dataset.id);
 
         //re-register click events
         registerCloseBtnEvent();
@@ -280,12 +309,6 @@ header.addEventListener("drop" , function(e){
 });
 
 
-if (false) {
-
-[].forEach.call(document.querySelectorAll('.ftscroller_x'), function(item) {
-    item.style.transform="translate3d(-"+Math.floor(Math.random() * 190)+"px,0,0)"
-});
-};
 </script>
 </body>
 </html>
