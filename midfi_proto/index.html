@@ -11,46 +11,41 @@
     <input id="search" type="search" results value="" placeholder="Find...">
 
     <ul id="mainNav" class="tabs mainTabs">
-      <li class="tab active mainTab" data-target="#page1"> <span>Movies</span>
-        <!-- <button type="button" class="close">×</button> -->
+      <li id="movieTab" class="tab active mainTab" data-target="#page1"> <span>Movies</span>
       </li>
-      <li class="tab mainTab" data-target="#page2"> <span>Series</span>
-        <!-- <button type="button" class="close">×</button> -->
+      <li id="seriesTab" class="tab mainTab" data-target="#page2"> <span>Series</span>
       </li>
-      <li class="tab mainTab" data-target="#page3"> <span>Kids</span>
-        <!-- <button type="button" class="close">×</button> -->
+      <li id="kidsTab" class="tab mainTab" data-target="#page3"> <span>Kids</span>
       </li>
     </ul>
 </header>
 
 <div id="first"></div>
-<div id="main">
-
-
+<div id="container">
+    <div id="movies"></div>
+    <div id="series"></div>
 </div>
 
 <footer></footer>
 
 <!--JS includes-->
 <script src='ftscroller-master/lib/ftscroller.js'></script>
-<script src="chrometabs/chrometab.js"></script> 
-
 
 <!-- JS templates -->
-<script id="template" type="template">
+<script id="movieTemplate" type="template">
 <div class="categoryRow">
     <ul class="tabsCat">
         <li class="tab" draggable="true" data-id='{id}'> <span>{categoryName}</span>
             <button type="button" class="close closeAdd">+</button>
         </li>
     </ul>
-        <div class='scrollBtn scrollBtnLeft' data-id='{id}' data-dir='left'>
-            <
-        </div>
-        <div class='scrollBtn scrollBtnRight' data-id='{id}' data-dir='right'>
-            >
-        </div>
-    <div id="scroll{id}" class='scrollable'>
+    <div class='scrollBtn scrollBtnLeft' data-id='{id}' data-dir='left'>
+        <
+    </div>
+    <div class='scrollBtn scrollBtnRight' data-id='{id}' data-dir='right'>
+        >
+    </div>
+    <div id="m_scroll{id}" class='scrollable'>
         <div class='sectionwrapper'>
             {movies}
         </div>
@@ -59,7 +54,63 @@
 </div>
 </script>
 
-<script id="movieTemplate" type="template">
+<script id="movieSectionTemplate" type="template">
+            <section>
+                <figure>
+                    <img src="new/m-{i}.jpg">
+                    <figcaption>
+
+                        <h3>>  &nbsp; Watch</h3>
+                        <p>Movie Title here<br>
+                        USA 2010<br>
+                        94 min<br><br>
+                        Chuck Norris, Brad Pitt, Tom Cruise, ...<br>
+                        <a href="#">> show more</a></p>
+                    </figcaption>
+                </figure>
+                <span class="stars">
+                    <img src="images/stars-{stars}.gif">
+                </span>
+            </section>
+</script>
+
+<script id="seriesTemplate" type="template">
+    <div class="categoryRow">
+        <ul class="tabsCat">
+            <li class="tab seriesTab" draggable="true" data-id='{id}'> <span>{categoryName}</span>
+                <button type="button" class="close closeAdd">+</button>
+            </li>
+        </ul>
+            <div class='scrollBtn scrollBtnLeft' data-id='{id}' data-dir='left'>
+                <
+            </div>
+            <div class='scrollBtn scrollBtnRight' data-id='{id}' data-dir='right'>
+                >
+            </div>
+        <div id="s_scroll{id}" class='scrollable'>
+            <div class='sectionwrapper'>
+                {movies}
+            </div>
+        </div>
+        <a id="showmore{id}" data-close="0" data-translate="0" class="showmore">V &nbsp;&nbsp;Show more</a>
+    </div>
+</script>
+
+<script id="seriesTemplateRecentlyWatched" type="template">
+    <div class="categoryRow">
+        <ul class="tabsCat">
+            <li class="tab seriesTab" draggable="true" data-id='{id}'> <span>{categoryName}</span>
+                <button type="button" class="close closeAdd">+</button>
+            </li>
+        </ul>
+        <div id="s_scroll{id}" class='scrollable'>
+            <div class='sectionwrapper'>
+                {movies}
+            </div>
+        </div>
+    </div>
+</script>
+<script id="seriesSectionTemplate" type="template">
             <section>
                 <figure>
                     <img src="new/m-{i}.jpg">
@@ -82,16 +133,17 @@
 <!-- JS -->
 <script>
 
-var Viewer = {
-    template:       document.getElementById('template').text.trim(),
-    movieTemplate:  document.getElementById('movieTemplate').text.trim(),
+var MovieViewer = {
+    template:       document.getElementById('movieTemplate').text.trim(),
+    movieTemplate:  document.getElementById('movieSectionTemplate').text.trim(),
     movieCategories: ['New Releases','Popular','Recommended','Action','Comedy','Drama','Fantasy','Sci-Fi','Thriller','Horror','Romantic'],
     scrollers: [],
     init: function(){
-        this.applyMovieTemplate(1,72);
+
+        this.applyTemplate(1,72);
     },
 
-    applyMovieTemplate: function(pageRepeat, moviesPerCat){
+    applyTemplate: function(pageRepeat, moviesPerCat){
         var temp='';
         var id=0;
 
@@ -122,26 +174,28 @@ var Viewer = {
                 
             };
         }
-        document.getElementById('main').innerHTML=temp;
+        temp+="<br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+        document.getElementById('movies').innerHTML=temp;
         this.initScrolls(id);
         this.initScrollBtns();
+        this.initShowMoreBtns();
     },
 
     initScrolls: function (maxId){
         for (var id = 0; id < maxId; id++) {
-            this.scrollers.push(new FTScroller(document.getElementById('scroll'+id), {scrollingY: false,snapping: false,scrollbars: false, disabledInputMethods:{scroll: true}}));
+            this.scrollers.push(new FTScroller(document.getElementById('m_scroll'+id), {scrollingY: false,snapping: false,scrollbars: false, disabledInputMethods:{scroll: true}}));
         }
     },
 
     initScrollBtns: function (){
-        [].forEach.call(document.querySelectorAll('.scrollBtn'), function(item) {
+        [].forEach.call(document.querySelectorAll('#movies .scrollBtn'), function(item) {
             //move scroller
             item.addEventListener("click", function (e){
-                // console.log(Viewer.scrollers);
+                // console.log(MovieViewer.scrollers);
                 var scrollId = item.dataset.id;
                 var duration = 500; //ms
                 var amount = item.dataset.dir === 'right' ? 1000 : -1000;
-                Viewer.scrollers[scrollId].scrollBy(amount,0,duration);
+                MovieViewer.scrollers[scrollId].scrollBy(amount,0,duration);
 
                 e.preventDefault();
             },false);
@@ -155,159 +209,370 @@ var Viewer = {
             },false);
         });
 
+    },
+
+    initShowMoreBtns: function(){
+        //show more links
+        [].forEach.call(document.querySelectorAll('#movies .showmore'), function(item) {
+            
+            //drag & drop behavior
+            item.addEventListener("click" , function(e){
+                e.preventDefault();
+                var containerId= e.target.id.replace(/showmore/,'');
+                var scrollContainer = document.getElementById('m_scroll'+containerId);
+                // console.log(e.target.dataset.close);
+                
+                //expanding
+                if (scrollContainer && e.target.dataset.close == 0) {
+                    //hide scroll buttons;
+                    [].forEach.call(item.parentNode.querySelectorAll('.scrollBtn'), function(btn) {
+                        btn.classList.add('hidden');   
+                    });
+
+                    var scroll = scrollContainer.querySelector('.ftscroller_x');
+
+                    //save scroll position width if set
+                    if (scroll.style.transform) {
+                        e.target.dataset.translate = scroll.style.transform;
+                        // console.log(scroll.style.transform);
+                    }
+                    //reset scroll position
+                    scroll.style.transform="translate3d(0,0,0)";
+                    //unwrap container
+                    scrollContainer.style.whiteSpace='initial';
+                    e.target.innerHTML='x &nbsp;&nbsp;Show less';
+                    e.target.dataset.close=1;
+
+                } 
+                // closing 
+                else if (scrollContainer && e.target.dataset.close == 1) {
+                    //show scroll buttons;
+                    [].forEach.call(item.parentNode.querySelectorAll('.scrollBtn'), function(btn) {
+                        btn.classList.remove('hidden');   
+                    });
+
+                    var scroll = scrollContainer.querySelector('.ftscroller_x');
+                    
+                    //restore scroll position if set
+                    if (e.target.dataset.translate != 0 && scroll) {
+                        scroll.style.transform = e.target.dataset.translate;
+                        // console.log(scroll.style.transform);
+                    }
+                    e.target.dataset.translate=0;
+                    scrollContainer.style.whiteSpace='nowrap';
+                    e.target.innerHTML='V &nbsp;&nbsp;Show more';
+                    e.target.dataset.close=0;
+                    scrollContainer.scrollIntoView();
+                    //window.scrollTo(0,scrollContainer.offsetTop);
+                }
+                
+                // console.log(containerId);
+                // console.log(scrollContainer);
+            },false);    
+
+        });
     }
 
 };
+MovieViewer.init();
 
-Viewer.init();
+var SeriesViewer = {
+    template:       document.getElementById('seriesTemplate').text.trim(),
+    movieTemplate:  document.getElementById('seriesSectionTemplate').text.trim(),
+    recentlyWatchedTemplate:  document.getElementById('seriesTemplateRecentlyWatched').text.trim(),
+    movieCategories: ['New Releases','Popular','Recommended','Recently Watched','Action','Comedy','Drama','Fantasy','Sci-Fi','Thriller','Horror'],
+    scrollers: [],
+    init: function(){
 
+        //this.applyMovieTemplate(1,72);
+        this.applyMovieTemplate(1,20);
+    },
 
+    applyMovieTemplate: function(pageRepeat, moviesPerCat){
+        var temp='';
+        var id=0;
 
+        var catTemp="";
 
+        //build up array
+        var imgs = [];
+        for (var i = 0; i < moviesPerCat; i++) {
+            imgs.push(i);
+        }
 
-// make tabs sortable
-//$('#mainNav').chrometab();
+        var page=0;
+        while (page++<pageRepeat){
+            for (var i = 0; i < this.movieCategories.length ; i++) {
 
+                catTemp = '';
+                //shuffle array
+                imgs.sort(function() {
+                  return .5 - Math.random();
+                });
 
+                if (i==3 /*recently watched*/) {
+                    var ii = imgs.length-1;
+                    catTemp += this.movieTemplate.replace(/{i}/,imgs[ii--])
+                                             .replace(/{stars}/,imgs[ii]%25);
+                    catTemp += this.movieTemplate.replace(/{i}/,imgs[ii--])
+                                             .replace(/{stars}/,imgs[ii]%25);
+                    catTemp += this.movieTemplate.replace(/{i}/,imgs[ii--])
+                                             .replace(/{stars}/,imgs[ii]%25);
+                    temp += this.recentlyWatchedTemplate.replace(/{categoryName}/, this.movieCategories[i])
+                                     .replace(/{id}/g,id++)
+                                     .replace(/{movies}/,catTemp);
+                }
+                else {
+                    for (var j = imgs.length - 1; j >= 0; j--) {
+                        catTemp += this.movieTemplate.replace(/{i}/,imgs[j])
+                                                     .replace(/{stars}/,imgs[j]%25);
+                    }
+                    temp += this.template.replace(/{categoryName}/, this.movieCategories[i])
+                                     .replace(/{id}/g,id++)
+                                     .replace(/{movies}/,catTemp);
+                }
+                
+                
+            };
+        }
+        document.getElementById('series').innerHTML=temp;
+        this.initScrolls(id);
+        this.initScrollBtns();
+        this.initShowMoreBtns();
+    },
 
+    initScrolls: function (maxId){
+        for (var id = 0; id < maxId; id++) {
+            this.scrollers.push(new FTScroller(document.getElementById('s_scroll'+id), {scrollingY: false,snapping: false,scrollbars: false, disabledInputMethods:{scroll: true}}));
+        }
+    },
 
-function addTabToMainNav(tabName,id){
-    // console.log(id);
-
-    var activeMainTab = document.querySelector('.active span');
-    // check if tab already exists
-    var tab = document.getElementById(id+'.'+activeMainTab.innerText);
-    if (tab) {
-        //let it blink...
-        tab.style['-webkit-animation']='blink_red 1s';
-        setTimeout(function(){tab.style['-webkit-animation']='';},1100);
-        return;
-    }
-    // var activeMainTabName = activeMainTab ? '<i>('+activeMainTab.innerText+')</i>' : '';
-    var activeMainTabName = activeMainTab ? ' in '+activeMainTab.innerText : '';
-    // console.log(activeMainTabName);
-    document.getElementById('mainNav').innerHTML += '<li class="tab" id="'+id+'.'+activeMainTab.innerText+'"> <span>'+tabName+activeMainTabName+'</span>' +  '<button type="button" class="close">×</button></li>';
-    registerCloseBtnEvent();
-    //$('#mainNav').chrometab();
-    //ok -> blink green
-    var tab = document.getElementById(id+'.'+activeMainTab.innerText);
-    if (tab) {
-        //let it blink...
-        tab.style['-webkit-animation']='blink_green 1s';
-        setTimeout(function(){tab.style['-webkit-animation']='';},1100);
-    }
-
-}
-
-//close buttons
-function registerCloseBtnEvent(){
-    [].forEach.call(document.querySelectorAll('#mainNav li button'), function(item) {
+    initScrollBtns: function (){
+        [].forEach.call(document.querySelectorAll('#series .scrollBtn'), function(item) {
+            //move scroller
             item.addEventListener("click", function (e){
-            // console.log(item);
-            item.parentNode.remove();
-            //$('#mainNav').chrometab();
-            e.preventDefault();
+                // console.log(SeriesViewer.scrollers);
+                var scrollId = item.dataset.id;
+                var duration = 500; //ms
+                var amount = item.dataset.dir === 'right' ? 1000 : -1000;
+                SeriesViewer
+            .scrollers[scrollId].scrollBy(amount,0,duration);
+
+                e.preventDefault();
+            },false);
+
+            item.addEventListener("mousedown", function (e){
+                item.classList.add('scrollBtnPressed');
+            },false);
+
+            item.addEventListener("mouseup", function (e){
+                item.classList.remove('scrollBtnPressed');
             },false);
         });
-}
 
-// drag and drop on to main navigation
-var header = document.getElementById('header');
-header.addEventListener("dragover" , function(e){
-    // console.log(e);
-    e.preventDefault();
-});
-header.addEventListener("drop" , function(e){
-    // console.log(e);
-    e.preventDefault();
-    var tabName = e.dataTransfer.getData("text");
-    var id = e.dataTransfer.getData("id");
-    addTabToMainNav(tabName,id);
-
-});
-
-// init category tabs
-[].forEach.call(document.querySelectorAll('.tabsCat li'), function(item) {
-    
-    //drag & drop behavior
-    item.addEventListener("dragstart" , function(ev){
-        document.getElementById('mainNav').style.paddingTop="20px";
-        // ev.dataTransfer.setData("text", ev.target.id);
-        ev.dataTransfer.setData("text", ev.target.childNodes[1].innerText);
-        ev.dataTransfer.setData("id", ev.target.dataset.id);
-    });
-
-    item.addEventListener("dragend" , function(ev){
-        document.getElementById('mainNav').style.paddingTop="0";
-        // ev.dataTransfer.setData("text", ev.target.id);
-    });
-    
-
-    //add tab to main nav by clicking on + button 
-    item.querySelector('button').addEventListener("click", function (e){
-        var tabName = item.childNodes[1].innerText;
-        addTabToMainNav(tabName,item.dataset.id);
-
-        //re-register click events
-        registerCloseBtnEvent();
-        e.preventDefault();
-        
-    },false);
-});
-
-
-
-//show more links
-[].forEach.call(document.querySelectorAll('.showmore'), function(item) {
-    
-    //drag & drop behavior
-    item.addEventListener("click" , function(e){
-        e.preventDefault();
-        var containerId= e.target.id.replace(/showmore/,'');
-        var scrollContainer = document.getElementById('scroll'+containerId);
-        // console.log(e.target.dataset.close);
-        
-        //expanding
-        if (scrollContainer && e.target.dataset.close == 0) {
+    },
+    initShowMoreBtns: function(){
+        //show more links
+        [].forEach.call(document.querySelectorAll('#series .showmore'), function(item) {
             
-            var scroll = scrollContainer.querySelector('.ftscroller_x');
+            //drag & drop behavior
+            item.addEventListener("click" , function(e){
+                e.preventDefault();
+                var containerId= e.target.id.replace(/showmore/,'');
+                var scrollContainer = document.getElementById('s_scroll'+containerId);
+                // console.log(e.target.dataset.close);
+                
+                //expanding
+                if (scrollContainer && e.target.dataset.close == 0) {
+                    //hide scroll buttons;
+                    [].forEach.call(item.parentNode.querySelectorAll('.scrollBtn'), function(btn) {
+                        btn.classList.add('hidden');   
+                    });
 
-            //save scroll position width if set
-            if (scroll.style.transform) {
-                e.target.dataset.translate = scroll.style.transform;
-                // console.log(scroll.style.transform);
-            }
-            //reset scroll position
-            scroll.style.transform="translate3d(0,0,0)";
-            //unwrap container
-            scrollContainer.style.whiteSpace='initial';
-            e.target.innerHTML='x &nbsp;&nbsp;Show less';
-            e.target.dataset.close=1;
+                    var scroll = scrollContainer.querySelector('.ftscroller_x');
 
-        } 
-        // closing 
-        else if (scrollContainer && e.target.dataset.close == 1) {
-            var scroll = scrollContainer.querySelector('.ftscroller_x');
+                    //save scroll position width if set
+                    if (scroll.style.transform) {
+                        e.target.dataset.translate = scroll.style.transform;
+                        // console.log(scroll.style.transform);
+                    }
+                    //reset scroll position
+                    scroll.style.transform="translate3d(0,0,0)";
+                    //unwrap container
+                    scrollContainer.style.whiteSpace='initial';
+                    e.target.innerHTML='x &nbsp;&nbsp;Show less';
+                    e.target.dataset.close=1;
+
+                } 
+                // closing 
+                else if (scrollContainer && e.target.dataset.close == 1) {
+                    //show scroll buttons;
+                    [].forEach.call(item.parentNode.querySelectorAll('.scrollBtn'), function(btn) {
+                        btn.classList.remove('hidden');   
+                    });
+
+                    var scroll = scrollContainer.querySelector('.ftscroller_x');
+                    
+                    //restore scroll position if set
+                    if (e.target.dataset.translate != 0 && scroll) {
+                        scroll.style.transform = e.target.dataset.translate;
+                        // console.log(scroll.style.transform);
+                    }
+                    e.target.dataset.translate=0;
+                    scrollContainer.style.whiteSpace='nowrap';
+                    e.target.innerHTML='V &nbsp;&nbsp;Show more';
+                    e.target.dataset.close=0;
+                    scrollContainer.scrollIntoView();
+                    //window.scrollTo(0,scrollContainer.offsetTop);
+                }
+                
+                // console.log(containerId);
+                // console.log(scrollContainer);
+            },false);    
+
+        });
+    }
+
+};
+SeriesViewer.init();
+
+
+var Navigation = {
+    header : document.getElementById('header'),
+    movieTab : document.getElementById('movieTab'),
+    seriesTab : document.getElementById('seriesTab'),
+    movieContainer : document.getElementById('movies'),
+    seriesContainer : document.getElementById('series'),
+
+    init: function () {
+        // init category tabs
+        [].forEach.call(document.querySelectorAll('.tabsCat li'), function(item) {
             
-            //restore scroll position if set
-            if (e.target.dataset.translate != 0 && scroll) {
-                scroll.style.transform = e.target.dataset.translate;
-                // console.log(scroll.style.transform);
+            //drag & drop behavior
+            item.addEventListener("dragstart" , function(ev){
+                document.getElementById('mainNav').style.paddingTop="20px";
+                // ev.dataTransfer.setData("text", ev.target.id);
+                ev.dataTransfer.setData("text", ev.target.childNodes[1].innerText);
+                ev.dataTransfer.setData("id", ev.target.dataset.id);
+            });
+
+            item.addEventListener("dragend" , function(ev){
+                document.getElementById('mainNav').style.paddingTop="0";
+                // ev.dataTransfer.setData("text", ev.target.id);
+            });
+            
+
+            //add tab to main nav by clicking on + button 
+            item.querySelector('button').addEventListener("click", function (e){
+                var tabName = item.childNodes[1].innerText;
+                Navigation.addTabToMainNav(tabName,item.dataset.id);
+
+                //re-register click events
+                Navigation.registerCloseBtnEvent();
+                e.preventDefault();
+                
+            },false);
+        });
+        this.initDragDrop();
+        this.initNav();
+    },
+    initDragDrop: function(){
+        this.header.addEventListener("dragover" , function(e){
+            // console.log(e);
+            e.preventDefault();
+        });
+        this.header.addEventListener("drop" , function(e){
+            // console.log(e);
+            e.preventDefault();
+            var tabName = e.dataTransfer.getData("text");
+            var id = e.dataTransfer.getData("id");
+            Navigation.addTabToMainNav(tabName,id);
+            Navigation.initNav();
+        });
+    },
+    initNav: function() {
+        var movieTab = document.getElementById('movieTab');
+        var seriesTab = document.getElementById('seriesTab');
+        document.getElementById('seriesTab').addEventListener('click',function(e){
+
+            seriesTab.classList.add('active');
+            movieTab.classList.remove('active');
+
+            window.scrollTo(0, 0);
+            Navigation.movieContainer.style.zIndex="-1";
+            Navigation.movieContainer.style.opacity="0";
+            setTimeout(function () {
+                Navigation.seriesContainer.style.opacity="1";
+                Navigation.seriesContainer.style.zIndex="1"
             }
-            e.target.dataset.translate=0;
-            scrollContainer.style.whiteSpace='nowrap';
-            e.target.innerHTML='V &nbsp;&nbsp;Show more';
-            e.target.dataset.close=0;
-            scrollContainer.scrollIntoView();
-            //window.scrollTo(0,scrollContainer.offsetTop);
+            ,500);
+            e.preventDefault();
+        },false);
+
+        document.getElementById('movieTab').addEventListener('click',function(e){
+            movieTab.classList.add('active');
+            seriesTab.classList.remove('active');
+            
+            window.scrollTo(0, 0);
+            Navigation.seriesContainer.style.zIndex="-1";
+            Navigation.seriesContainer.style.opacity="0";
+            setTimeout(function () {
+                Navigation.movieContainer.style.opacity="1";
+                Navigation.movieContainer.style.zIndex="1"
+            }
+            ,500);
+            e.preventDefault();
+        },false);
+
+        document.getElementById('kidsTab').addEventListener('click',function(e){
+            //console.log('click');
+            e.preventDefault();
+            alert('Sorry, not yet implemented!');
+        });
+    },
+    //insert new tab
+    addTabToMainNav: function (tabName,id){
+        // console.log(id);
+
+        var activeMainTab = document.querySelector('.active span');
+        // check if tab already exists
+        var tab = document.getElementById(id+'.'+activeMainTab.innerText);
+        if (tab) {
+            //let it blink...
+            tab.style['-webkit-animation']='blink_red 1s';
+            setTimeout(function(){tab.style['-webkit-animation']='';},1100);
+            return;
         }
-        
-        // console.log(containerId);
-        // console.log(scrollContainer);
-    },false);    
+        // var activeMainTabName = activeMainTab ? '<i>('+activeMainTab.innerText+')</i>' : '';
+        var activeMainTabName = activeMainTab ? ' in '+activeMainTab.innerText : '';
+        // console.log(activeMainTabName);
+        document.getElementById('mainNav').innerHTML += '<li class="tab" id="'+id+'.'+activeMainTab.innerText+'"> <span>'+tabName+activeMainTabName+'</span>' +  '<button type="button" class="close">×</button></li>';
+        this.registerCloseBtnEvent();
+        this.initNav();
+        //$('#mainNav').chrometab();
+        //ok -> blink green
+        var tab = document.getElementById(id+'.'+activeMainTab.innerText);
+        if (tab) {
+            //let it blink...
+            tab.style['-webkit-animation']='blink_green 1s';
+            setTimeout(function(){tab.style['-webkit-animation']='';},1100);
+        }
+    },
 
-});
+    //close buttons
+    registerCloseBtnEvent : function (){
+        [].forEach.call(document.querySelectorAll('#mainNav li button'), function(item) {
+                item.addEventListener("click", function (e){
+                // console.log(item);
+                item.parentNode.remove();
+                //$('#mainNav').chrometab();
+                e.preventDefault();
+                },false);
+            });
+    }
 
+};
+Navigation.init();
 
 </script>
 </body>

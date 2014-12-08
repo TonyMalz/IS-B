@@ -424,7 +424,7 @@ header {
 }
 
 #first {
-    margin-top: 90px;
+    margin-top: 63px;
 }
 
 .login {
@@ -482,6 +482,34 @@ _border-radius: 13px;
 .main {
     padding-top: 35px;
     
+}
+
+#container {
+  display: block;
+  position: relative;
+}
+
+
+#movies {
+  background: rgb(76, 72, 70);
+  width: 100%;
+  position: absolute;
+  transition: all .5s ease-in;
+}
+
+#series {
+  /*background: rgb(95, 72, 61);*/
+  background: rgb(68, 50, 41);
+  z-index: -1;
+  opacity: 0;
+  width: 100%;
+  position: absolute;
+  transition: all .5s ease-in;
+  /*transition-delay: 1s;*/
+}
+.seriesTab {
+  /*color: rgb(221, 213, 175);*/
+  color: rgb(208, 177, 135);
 }
 /*
 .tab {
