@@ -111,15 +111,16 @@
     </div>
 </script>
 <script id="seriesSectionTemplate" type="template">
-            <section>
-                <figure>
-                    <img src="new/m-{i}.jpg">
+            <section class="sectionSeries">
+                <figure class="figureSeries">
+                    <img src="series/m-{i}.jpg">
                     <figcaption>
 
                         <h3>>  &nbsp; Watch</h3>
-                        <p>Movie Title here<br>
-                        USA 2010<br>
-                        94 min<br><br>
+                        <p>Series Title here<br>
+                        SEASON 3<br>
+                        USA 2012<br>
+                        <br>
                         Chuck Norris, Brad Pitt, Tom Cruise, ...<br>
                         <a href="#">> show more</a></p>
                     </figcaption>
@@ -284,8 +285,7 @@ var SeriesViewer = {
     scrollers: [],
     init: function(){
 
-        //this.applyMovieTemplate(1,72);
-        this.applyMovieTemplate(1,20);
+        this.applyMovieTemplate(1,68);
     },
 
     applyMovieTemplate: function(pageRepeat, moviesPerCat){
