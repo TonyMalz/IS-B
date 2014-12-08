@@ -1009,6 +1009,7 @@ figure:hover p
 figcaption h3 {
     background: black;
     margin-top: 10px;
+    color: rgb(168, 205, 209);
 }
 figcaption a {
     color: white;
