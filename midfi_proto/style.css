@@ -419,7 +419,8 @@ header {
     position: fixed;
     z-index: 100;
     width: 98%;
-    background: rgb(51, 66, 68);
+    /*background: rgb(51, 66, 68);*/
+    background: -webkit-linear-gradient(left, rgb(2, 2, 2) , rgb(32, 49, 69) 78%);
     top:0;
 }
 
