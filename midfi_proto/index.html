@@ -1657,6 +1657,7 @@ var MovieViewer = {
                     scrollContainer.style.whiteSpace='initial';
                     e.target.innerHTML='x &nbsp;&nbsp;Show less';
                     e.target.dataset.close=1;
+                    disableVisualMouseGrabbing('m_scroll'+containerId);
 
                 } 
                 // closing 
@@ -1678,6 +1679,7 @@ var MovieViewer = {
                     e.target.innerHTML='V &nbsp;&nbsp;Show more';
                     e.target.dataset.close=0;
                     scrollContainer.scrollIntoView();
+                    enableVisualMouseGrabbing('m_scroll'+containerId);
                     //window.scrollTo(0,scrollContainer.offsetTop);
                 }
                 
@@ -1818,7 +1820,7 @@ var SeriesViewer = {
                     scrollContainer.style.whiteSpace='initial';
                     e.target.innerHTML='x &nbsp;&nbsp;Show less';
                     e.target.dataset.close=1;
-
+                    disableVisualMouseGrabbing('s_scroll'+containerId);
                 } 
                 // closing 
                 else if (scrollContainer && e.target.dataset.close == 1) {
@@ -1839,7 +1841,7 @@ var SeriesViewer = {
                     e.target.innerHTML='V &nbsp;&nbsp;Show more';
                     e.target.dataset.close=0;
                     scrollContainer.scrollIntoView();
-                    //window.scrollTo(0,scrollContainer.offsetTop);
+                    enableVisualMouseGrabbing('s_scroll'+containerId);
                 }
                 
                 // console.log(containerId);
@@ -1976,7 +1978,8 @@ var WatchlistViewer = {
                     scrollContainer.style.whiteSpace='initial';
                     e.target.innerHTML='x &nbsp;&nbsp;Show less';
                     e.target.dataset.close=1;
-
+                    console.log('hallo');
+                    disableVisualMouseGrabbing('wl_scroll'+containerId);
                 } 
                 // closing 
                 else if (scrollContainer && e.target.dataset.close == 1) {
@@ -1997,7 +2000,7 @@ var WatchlistViewer = {
                     e.target.innerHTML='V &nbsp;&nbsp;Show more';
                     e.target.dataset.close=0;
                     scrollContainer.scrollIntoView();
-                    //window.scrollTo(0,scrollContainer.offsetTop);
+                    enableVisualMouseGrabbing('wl_scroll'+containerId);
                 }
                 
                 // console.log(containerId);
@@ -2162,20 +2165,44 @@ var Navigation = {
 };
 Navigation.init();
 
-[].forEach.call(document.querySelectorAll('.scrollable'),function(item){
-    item.addEventListener('mousedown',function(e){
-        item.style.cursor='-webkit-grabbing';
+function enableVisualMouseGrabbing(id) {
+    var sid = id ? '#'+id : '.scrollable';
+    [].forEach.call(document.querySelectorAll(sid),function(item){
+        item.addEventListener('mousedown',function(e){
+            item.style.cursor='-webkit-grabbing';
+        });
+        item.addEventListener('mouseup',function(e){
+            item.style.cursor='-webkit-grab';
+        });
+        item.addEventListener('mouseover',function(e){
+            item.style.cursor='-webkit-grab';
+        });
     });
-    item.addEventListener('mouseup',function(e){
-        item.style.cursor='-webkit-grab';
-    })
-});
+}
+function disableVisualMouseGrabbing(id) {
+    var sid = id ? '#'+id : '.scrollable';
+    [].forEach.call(document.querySelectorAll(sid),function(item){
+        item.addEventListener('mousedown',function(e){
+            item.style.cursor='default';
+        });
+        item.addEventListener('mouseup',function(e){
+            item.style.cursor='default';
+        });
+        item.addEventListener('mouseover',function(e){
+            item.style.cursor='default';
+        });
+    });
+}
 
+
+//---------- experiments ---------------------------------
+
+enableVisualMouseGrabbing();
+//disableVisualMouseGrabbing();
 </script>
-
 <script src='jquery.js'></script>
 <script>
-//---------- experiments
+
 //animate watch later via jquery animation
     $('.watchLater').on('click', function () {
         var cart = $('#watchlistTab');
