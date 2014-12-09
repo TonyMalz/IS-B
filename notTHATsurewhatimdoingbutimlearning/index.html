@@ -10,7 +10,7 @@
     <input id="search" type="search" results value="" placeholder="Find...">
 
     <ul id="mainNav" class="tabs mainTabs">
-      <li id="movieTab" class="tab active mainTab" > <span>Movies</span>
+      <li id="movieTab" class="tab mainTab" > <span>Movies</span>
       </li>
       <li id="seriesTab" class="tab mainTab"> <span>Series</span>
       </li>
@@ -20,6 +20,7 @@
       </li>
     </ul>
 </header>
+
 <div id="first"></div>
 <div id="container">
     <div id="movies"></div>
@@ -27,44 +28,59 @@
     <div id="watchlist"></div>
 </div>
 
-	<div id="mainNav" class="tabsCat"></div>
-	<li class="tabsCat"><span>Accounts</span></li>
-		<div id="scroll" class="sectionwrapper">
-			<form>
-			<!-- 
-				Keine Required werte weil das nichtder erstellen
-				sondern bearbeiten dialog ist?
-			-->
-			<div id="top_box">
-				<div class="account_img"><img src="pic.png" height="100%" width="100%"></div>
-				<div class="account_img">create <br/> new <br/> account</div>
+<div id="whole_settings_thing">
+	<div id="second"></div>
+
+	    <ul class="tabs mainTabs">
+	        <li class="tab active mainTab"><span>Accounts</span></li>
+	    </ul>
+		<form>
+			<div id="top_box" style="color:rgb(200, 200, 200)">
+					<div class="account_img"><img src="pic.png" height="100%" width="100%">Klaus Peter</div>
+					<div class="account_img">create <br/> new <br/> account <br/>+</div>
 			</div>
-			<div id="left_box">
-				<label for="login_name">Login Name</label><br/>
-				<input id="login_name" type="text" name="login_name"/> <br/>
+			<div id="spacy">----------^---------------------------------</div>
+			<div id="lower_box" >
+				<div id="left_box">
+					<label for="login_name">Login Name</label>
+					<br/>
+					<input id="login_name" type="text" name="login_name"/>
+					<br/>
 
-				<label for="first_name">First Name</label><br/>
-				<input id="first_name" type="text" name="first_name"/> <br/>
+					<label for="first_name">First Name</label>
+					<br/>
+					<input id="first_name" type="text" name="first_name"/>
+					<br/>
 
-				<label for="surname">Surname</label><br/>
-				<input id="surname" type="text" name="surname"/><br/>
-			</div>
-			<div id="right_box">
-				<label for="password">Password</label><br/>
-				<input id="password" type="password" name="password"/><br/>
+					<label for="surname">Surname</label>
+					<br/>
+					<input id="surname" type="text" name="surname"/>
+					<br/>
+				</div>
+				<div id="right_box">
+					<label for="password">Password</label>
+					<br/>
+					<input id="password" type="password" name="password"/>
+					<br/>
 
-				<label for="birthdate">Day of birth</label><br/>
-				<input id="birthdate" type="date" name="birthdate"/><br/>
-					
-				<label for="age_restriction">Age restriction</label><br/>
-				<input id="age_restriction" type="radio" name="age_restriction" value="disabled"/>Enabled
-				<br/>
+					<label for="birthdate">Day of birth</label>
+					<br/>
+					<input id="birthdate" type="date" name="birthdate"/>
+					<br/>
+						
+					<label for="age_restriction">Age restriction</label>
+					<br/>
+					<input id="age_restriction" type="radio" name="age_restriction" value="disabled"/>Enabled
+					<br/>
 
-				<input id="age_restriction" type="radio" name="age_restriction" value="disabled"/>Disabled<br/>
+					<input id="age_restriction" type="radio" name="age_restriction" value="enabled"/>Disabled
+					<br/>
 
-				<input id="save_button" type="submit" value="Save"/>
+					<input id="save_button" type="submit" value="Save"/>
+				</div>
 			</div>
 		</form>
+	</div>
 	</div>
 </body>
 </html>
