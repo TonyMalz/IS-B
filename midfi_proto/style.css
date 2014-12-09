@@ -430,16 +430,21 @@ header {
 
 .login {
     color: white;
-    text-align: right;
-    text-decoration: none;
-    font-size:17px;
-    text-shadow: 0 1px 0 black;
-    padding-right: 10px;
-    padding-left: 10px;
-    height: 0;
-    float: right;
-    border-left: 30px solid transparent;
-    border-bottom: 30px solid #333;
+text-align: right;
+text-decoration: none;
+font-size: 17px;
+/* text-shadow: 0 1px 0 black; */
+padding-right: 10px;
+padding-left: 10px;
+height: 0;
+float: right;
+border-left: 30px solid transparent;
+border-bottom: 24px solid #333;
+right: 0;
+position: absolute;
+top: 33px;
+font-size: 14px;
+color: rgb(138, 157, 158);
 
 }
 /*.mainTab {
