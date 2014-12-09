@@ -508,6 +508,18 @@ _border-radius: 13px;
   transition: all .5s ease-in;
   /*transition-delay: 1s;*/
 }
+
+#watchlist {
+  /*background: rgb(95, 72, 61);*/
+  background: rgb(41, 54, 68);
+  z-index: -1;
+  opacity: 0;
+  width: 100%;
+  position: absolute;
+  transition: all .5s ease-in;
+  /*transition-delay: 1s;*/
+}
+
 .seriesTab {
   /*color: rgb(221, 213, 175);*/
   color: rgb(208, 177, 135);
