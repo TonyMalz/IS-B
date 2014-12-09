@@ -1,0 +1,196 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Video on Demand</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+	<script>
+
+var MovieView = {
+//and it sucks
+
+// The default code is a com class (inherited from xui.Com)
+
+    // Ensure that all the value of "key/value pair" does not refer to external variables
+        // To determine whether or not the com will be destroyed, when the first UI control be destroyed
+        // autoDestroy : true,
+        // To initialize properties
+        // properties : {},
+            // To initialize instance(e.g. properties)
+            init : function(){
+            	this.iniComponents();
+            },
+                // To initialize internal components (mostly UI controls)
+                // *** If you're not a skilled, dont modify this function manually ***
+                iniComponents : function(){
+                    // [[Code created by CrossUI RAD Studio
+                    var host=this, children=[], append=function(child){children.push(child.get(0));};
+
+                    append(
+                        (new xui.UI.SLabel())
+                        .setHost(host,"ctl_slabel1")
+                        .setLeft(270)
+                        .setTop(30)
+                        .setCaption("Movie title")
+                    );
+
+                    append(
+                        (new xui.UI.Image())
+                        .setHost(host,"ctl_image3")
+                        .setLeft(20)
+                        .setTop(30)
+                        .setSrc("http://www.crossui.com/RAD/img/pic.png")
+                    );
+
+                    append(
+                        (new xui.UI.SLabel())
+                        .setHost(host,"ctl_slabel2")
+                        .setLeft(270)
+                        .setTop(70)
+                        .setCaption("Description")
+                    );
+
+                    append(
+                        (new xui.UI.HTMLButton())
+                        .setHost(host,"ctl_htmlbutton1")
+                        .setLeft(40)
+                        .setTop(230)
+                        .setWidth(100)
+                        .setHeight(22)
+                        .setHtml("Watch >")
+                    );
+
+                    append(
+                        (new xui.UI.HTMLButton())
+                        .setHost(host,"ctl_htmlbutton2")
+                        .setLeft(40)
+                        .setTop(260)
+                        .setWidth(100)
+                        .setHeight(22)
+                        .setHtml("Trailer >")
+                    );
+
+                    append(
+                        (new xui.UI.SLabel())
+                        .setHost(host,"ctl_slabel3")
+                        .setLeft(50)
+                        .setTop(290)
+                        .setCaption("replace this with the stars")
+                    );
+
+                    append(
+                        (new xui.UI.SLabel())
+                        .setHost(host,"ctl_slabel4")
+                        .setLeft(40)
+                        .setTop(320)
+                        .setCaption("user Reviews:")
+                    );
+
+                    append(
+                        (new xui.UI.SLabel())
+                        .setHost(host,"ctl_slabel5")
+                        .setLeft(40)
+                        .setTop(350)
+                        .setCaption("Review 1")
+                    );
+
+                    append(
+                        (new xui.UI.SLabel())
+                        .setHost(host,"ctl_slabel6")
+                        .setLeft(260)
+                        .setTop(350)
+                        .setCaption("Review 2")
+                    );
+
+                    append(
+                        (new xui.UI.SLabel())
+                        .setHost(host,"ctl_slabel7")
+                        .setLeft(550)
+                        .setTop(350)
+                        .setCaption("Review3")
+                    );
+
+                    append(
+                        (new xui.UI.SLabel())
+                        .setHost(host,"ctl_slabel8")
+                        .setLeft(430)
+                        .setTop(290)
+                        .setCaption("My rating")
+                    );
+
+                    append(
+                        (new xui.UI.HTMLButton())
+                        .setHost(host,"ctl_htmlbutton3")
+                        .setLeft(430)
+                        .setTop(310)
+                        .setWidth(100)
+                        .setHeight(22)
+                        .setHtml("add review")
+                    );
+
+                    append(
+                        (new xui.UI.PopMenu())
+                        .setHost(host,"ctl_popmenu7")
+                        .setItems([{
+                            "id" : "a",
+                            "caption" : "item a",
+                            "image" : "http://www.crossui.com/RAD/img/demo.png"
+                        },{
+                            "id" : "b",
+                            "caption" : "item b",
+                            "image" : "http://www.crossui.com/RAD/img/demo.png"
+                        },{
+                            "id" : "c",
+                            "caption" : "item c",
+                            "image" : "http://www.crossui.com/RAD/img/demo.png"
+                        },{
+                            "id" : "d",
+                            "caption" : "item d",
+                            "image" : "http://www.crossui.com/RAD/img/demo.png",
+                            "disabled" : true
+                        }])
+                        .setWidth(82)
+                        .setHeight(84)
+                    );
+
+                    append(
+                        (new xui.UI.SLabel())
+                        .setHost(host,"ctl_slabel9")
+                        .setLeft(510)
+                        .setTop(30)
+                        .setCaption("Actors go here")
+                    );
+
+                    return children;
+                    // ]]Code created by CrossUI RAD Studio
+                },
+                    // Give a chance to determine which UI controls will be appended to parent container
+                    customAppend : function(parent, subId, left, top){
+                        // "return false" will cause all the internal UI controls will be added to the parent panel
+                        return false;
+                    },
+                        // Give a chance to load other resource
+                        iniResource: function(com, threadid){
+                            //xui.Thread.suspend(threadid);
+                            //var callback=function(/**/){
+                            //    /**/
+                            //    xui.Thread.resume(threadid);
+                            //};
+                        },
+                            // Give a chance to load other com
+                            iniExComs : function(com, threadid){
+                                //xui.Thread.suspend(threadid);
+                                //var callback=function(/**/){
+                                //    /**/
+                                //    xui.Thread.resume(threadid);
+                                //};
+                            }
+    
+};
+MovieView.init();
+</script>
+</body>
+</html>
