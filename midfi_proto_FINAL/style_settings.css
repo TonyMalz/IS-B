@@ -479,9 +479,10 @@ header {
 width: 70px;
 position: absolute;
 top: 30px;
-left: 0px;
+left: 2px;
 z-index: 10;
-_border-radius: 13px;
+border-radius: 13px;
+border: 0 solid black;
 }
 
 .main {
