@@ -11,13 +11,13 @@
     <input id="search" type="search" results value="" placeholder="Find...">
 
     <ul id="mainNav" class="tabs mainTabs">
-      <li id="movieTab" class="tab active mainTab" > <span>Movies</span>
+      <li id="movieTab" class="tab active mainTab" data-id="movies" > <span>Movies</span>
       </li>
-      <li id="seriesTab" class="tab mainTab"> <span>Series</span>
+      <li id="seriesTab" class="tab mainTab" data-id="series"> <span>Series</span>
       </li>
-      <li id="kidsTab" class="tab mainTab"> <span>Kids</span>
+      <li id="kidsTab" class="tab mainTab" data-id=""> <span>Kids</span>
       </li>
-      <li id="watchlistTab" class="tab mainTab"> <span>Watch List</span>
+      <li id="watchlistTab" class="tab mainTab" data-id="watchlist"> <span>Watch List</span>
       </li>
     </ul>
       <a href="#" class="login">Settings</a>
@@ -759,64 +759,25 @@ var Navigation = {
         });
     },
     initNav: function() {
-        var movieTab = document.getElementById('movieTab');
-        var seriesTab = document.getElementById('seriesTab');
-        var watchlistTab = document.getElementById('watchlistTab');
-        document.getElementById('seriesTab').addEventListener('click',function(e){
+        [].forEach.call(document.querySelectorAll('#mainNav li'), function(item){
+            item.addEventListener('click',function(e){
+                [].forEach.call(document.querySelectorAll('#mainNav li'), function(li){
+                    li.classList.remove('active');
+                    var containerId = document.getElementById(li.dataset.id);
+                    if (containerId) {
+                        containerId.style.zIndex="-1";
+                        containerId.style.opacity="0";
+                    }
 
-            seriesTab.classList.add('active');
-            movieTab.classList.remove('active');
-            watchlistTab.classList.remove('active');
-
-            window.scrollTo(0, 0);
-            Navigation.movieContainer.style.zIndex="-1";
-            Navigation.movieContainer.style.opacity="0";
-            Navigation.watchlistContainer.style.zIndex="-1";
-            Navigation.watchlistContainer.style.opacity="0";
-            setTimeout(function () {
-                Navigation.seriesContainer.style.opacity="1";
-                Navigation.seriesContainer.style.zIndex="1"
-            }
-            ,500);
-            e.preventDefault();
-        },false);
-
-        document.getElementById('movieTab').addEventListener('click',function(e){
-            movieTab.classList.add('active');
-            seriesTab.classList.remove('active');
-            watchlistTab.classList.remove('active');
-            
-            window.scrollTo(0, 0);
-            Navigation.seriesContainer.style.zIndex="-1";
-            Navigation.seriesContainer.style.opacity="0";
-            Navigation.watchlistContainer.style.zIndex="-1";
-            Navigation.watchlistContainer.style.opacity="0";
-            setTimeout(function () {
-                Navigation.movieContainer.style.opacity="1";
-                Navigation.movieContainer.style.zIndex="1"
-            }
-            ,500);
-            e.preventDefault();
-        },false);
-
-        document.getElementById('watchlistTab').addEventListener('click',function(e){
-            watchlistTab.classList.add('active');
-            movieTab.classList.remove('active');
-            seriesTab.classList.remove('active');
-            
-            window.scrollTo(0, 0);
-            Navigation.seriesContainer.style.zIndex="-1";
-            Navigation.seriesContainer.style.opacity="0";
-            Navigation.movieContainer.style.zIndex="-1";
-            Navigation.movieContainer.style.opacity="0";
-            setTimeout(function () {
-                Navigation.watchlistContainer.style.opacity="1";
-                Navigation.watchlistContainer.style.zIndex="1"
-            }
-            ,500);
-            e.preventDefault();
-        },false);
-
+                });
+                item.classList.add('active');
+                var containerId = document.getElementById(item.dataset.id)
+                if (containerId) {
+                    containerId.style.zIndex="1";
+                    containerId.style.opacity="1";
+                }
+            });
+        });
         document.getElementById('kidsTab').addEventListener('click',function(e){
             //console.log('click');
             e.preventDefault();
@@ -864,6 +825,9 @@ var Navigation = {
 
 };
 Navigation.init();
+
+
+
 </script>
 
 <script src='jquery.js'></script>

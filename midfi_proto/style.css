@@ -805,6 +805,9 @@ position: absolute;
   border-top-width: 0px;
   border-bottom-width: 0px;
 }
+.watchLater:before {
+  content: '+ ';
+}
 
 @-webkit-keyframes 'watch_list' {
   50% {
