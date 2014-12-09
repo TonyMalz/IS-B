@@ -3,25 +3,42 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>Video on Demand</title>
-	<link rel="stylesheet" href="style.css"/>
+	<link rel="stylesheet" href="../midfi_proto/style.css"/>
 </head>
 <body>
-	<header>
-		<input id="search" type="search" results value="Find..">
-	    
-		<a href="#" class="mainTab mainTabActive movies">Movies</a>
-		<a href="#" class="mainTab series">Series</a>
-		<a href="#" class="mainTab kids">Kids</a>
-		<a href="#" class="login">Settings</a>
-	</header>
-	<div id="first"></div>
-	<div id="main" class="tab">Accounts</div>
+<header id="header">
+    <input id="search" type="search" results value="" placeholder="Find...">
+
+    <ul id="mainNav" class="tabs mainTabs">
+      <li id="movieTab" class="tab active mainTab" > <span>Movies</span>
+      </li>
+      <li id="seriesTab" class="tab mainTab"> <span>Series</span>
+      </li>
+      <li id="kidsTab" class="tab mainTab"> <span>Kids</span>
+      </li>
+      <li id="watchlistTab" class="tab mainTab"> <span>Watch List</span>
+      </li>
+    </ul>
+</header>
+<div id="first"></div>
+<div id="container">
+    <div id="movies"></div>
+    <div id="series"></div>
+    <div id="watchlist"></div>
+</div>
+
+	<div id="mainNav" class="tabsCat"></div>
+	<li class="tabsCat"><span>Accounts</span></li>
 		<div id="scroll" class="sectionwrapper">
 			<form>
 			<!-- 
 				Keine Required werte weil das nichtder erstellen
 				sondern bearbeiten dialog ist?
 			-->
+			<div id="top_box">
+				<div class="account_img"><img src="pic.png" height="100%" width="100%"></div>
+				<div class="account_img">create <br/> new <br/> account</div>
+			</div>
 			<div id="left_box">
 				<label for="login_name">Login Name</label><br/>
 				<input id="login_name" type="text" name="login_name"/> <br/>
@@ -34,7 +51,7 @@
 			</div>
 			<div id="right_box">
 				<label for="password">Password</label><br/>
-				<input id="password" type="text" name="password"/><br/>
+				<input id="password" type="password" name="password"/><br/>
 
 				<label for="birthdate">Day of birth</label><br/>
 				<input id="birthdate" type="date" name="birthdate"/><br/>
@@ -42,7 +59,7 @@
 				<label for="age_restriction">Age restriction</label><br/>
 				<input id="age_restriction" type="radio" name="age_restriction" value="disabled"/>Enabled
 				<br/>
-				
+
 				<input id="age_restriction" type="radio" name="age_restriction" value="disabled"/>Disabled<br/>
 
 				<input id="save_button" type="submit" value="Save"/>
@@ -51,4 +68,3 @@
 	</div>
 </body>
 </html>
-<!-- <input type="submit" value="Login"/> -->
