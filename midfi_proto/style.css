@@ -499,6 +499,8 @@ _border-radius: 13px;
 #movies {
   background: rgb(76, 72, 70);
   width: 100%;
+  z-index: 1;
+  opacity: 1;
   position: absolute;
   transition: all .5s ease-in;
 }
@@ -511,7 +513,6 @@ _border-radius: 13px;
   width: 100%;
   position: absolute;
   transition: all .5s ease-in;
-  /*transition-delay: 1s;*/
 }
 
 #watchlist {
@@ -522,8 +523,17 @@ _border-radius: 13px;
   width: 100%;
   position: absolute;
   transition: all .5s ease-in;
-  /*transition-delay: 1s;*/
 }
+
+#favtab {
+  background: rgb(95, 72, 61);
+  z-index: -1;
+  opacity: 0;
+  width: 100%;
+  position: absolute;
+  transition: all .5s ease-in;
+}
+
 /*<hat Oli eingefügt>*/
 #right_box {
     float:right;
@@ -851,7 +861,7 @@ footer {
             box-shadow: 0 10px 18px -8px;
             padding: 0px;
             display: inline-flex;
-            cursor: pointer;
+            cursor: -webkit-grab;
             _position: relative;
         }
 
@@ -995,7 +1005,7 @@ figure {
     _border: 1px solid white;
     _box-shadow: 1px rgba(255,255,255,.3);
     display: block;
-    cursor: pointer;
+    /*cursor: pointer;*/
     overflow: hidden;
 }
 
@@ -1037,12 +1047,14 @@ figcaption p {
 }
 
 figcaption h3 {
+    padding-left: 50px;
     transition-delay: .2s;
 }
 
 figcaption p {
     transition-delay: .4s;
     font-size: 0.8em;
+    /*cursor: default;*/
 }
 
 figure:hover h3,
@@ -1055,7 +1067,27 @@ figcaption h3 {
     background: black;
     margin-top: 10px;
     color: rgb(168, 205, 209);
+    cursor: pointer;
 }
+
+figcaption h3:hover {
+    background: rgb(50, 61, 62);
+    margin-top: 10px;
+    color: rgb(168, 205, 209);
+}
+
+figcaption h3:before {
+  content: ' > ';
+  border: 2px solid rgb(168, 205, 209);
+  border-radius: 50%;
+  background: rgba(168, 205, 209,0.3);
+  position: absolute;
+  padding-left: 7px;
+  padding-right: 7px;
+  left: 10px;
+  top: 7px;
+}
+
 figcaption a {
     color: white;
 }
